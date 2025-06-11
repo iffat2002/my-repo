@@ -1,0 +1,58 @@
+[
+  {
+    "type": "MEDIUM",
+    "date": "2025.01.06",
+    "title": "Fraudslaying AI Agents with Zero-Knowledge Cryptography"
+  },
+  {
+    "type": "DEMOS",
+    "date": "2024.10.21",
+    "title": "Bagel x Inference Labs // Bagel Gets Verified"
+  },
+  {
+    "type": "Community",
+    "date": "2024.08.23",
+    "title": "Proof of Inference at the Speed of TAO"
+  },
+  {
+    "type": "MEDIUM",
+    "date": "2024.07.24",
+    "title": "Analysis of Weight Copying Mitigations in Bittensor",
+    "group": true
+  },
+  {
+    "type": "MEDIUM",
+    "date": "2024.06.12",
+    "title": "Bottensor Miner DDoS Mitigation Guide",
+    "group": true
+  },
+  {
+    "type": "DEMOS",
+    "date": "2024.06.12",
+    "title": "Lorem ipsum dolor sit amet, consectetur adipiscing",
+    "group": true
+  },
+  {
+    "type": "COMMUNITY",
+    "date": "2024.06.12",
+    "title": "Lorem ipsum dolor sit amet, consectetur adipiscing",
+    "group": true
+  },
+  {
+    "type": "DEMOS",
+    "date": "2024.06.12",
+    "title": "Lorem ipsum dolor sit amet, consectetur adipiscing",
+    "group": true
+  },
+  {
+    "type": "COMMUNITY",
+    "date": "2024.06.12",
+    "title": "Lorem ipsum dolor sit amet, consectetur adipiscing",
+    "group": true
+  },
+  {
+    "type": "SERTN",
+    "title": "sertn",
+    "footer": true
+  }
+]

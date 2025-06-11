@@ -1,7 +1,9 @@
 import "./App.css";
+import Arrow from "./assets/svgs/Arrow";
 import React, { useEffect } from "react";
 import Header from "./components/Header";
 import Marquee from "react-fast-marquee";
+import feedData from "./data/feedData.json";
 import ScrambleText from "./components/ScrambleText";
 function App() {
   const marqueeContent = [
@@ -80,6 +82,11 @@ function App() {
       value: "$102.5",
     },
   ];
+
+  const groupedItems = feedData.filter((item) => item.group);
+  const normalItems = feedData.filter((item) => !item.group && !item.footer);
+  const footerItem = feedData.find((item) => item.footer);
+
 
   return (
     <div className="sertn-ai">
@@ -165,7 +172,7 @@ function App() {
                 <div className="m-right"></div>
               </div>
               <div className="manifesto-table">
-                {manifesto.map((item, index) => (
+                {manifesto.map((item) => (
                   <div key={item.id} className="manifesto-item">
                     <div className="left-column">
                       <span className="item-number"><ScrambleText text={item.id} /></span>
@@ -216,6 +223,178 @@ function App() {
                 <div className="line"></div>
                 <div className="line"></div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="marquee-section">
+          <div className="box">
+            <div className="marquee-tag">
+              <Marquee gradient={false} speed={40}>
+                <div className="logo-container">
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                </div>
+                <div className="logo-container">
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                </div>
+              </Marquee>
+            </div>
+          </div>
+        </section>
+
+        <section className="feed">
+          <div className="box">
+            <div className="feed-content">
+              <div className="feed-head">
+                <h2>Feed</h2>
+              </div>
+
+              {normalItems.map((item, index) => (
+                <div className="feed-main-content-item" key={index}>
+                  <div className="tab">
+                    <h4>{item.type}</h4>
+                  </div>
+                  <div className="info">
+                    <h6>{item.date}</h6>
+                    <h3>{item.title}</h3>
+                    <h6>
+                      {item.type} <Arrow />
+                    </h6>
+                  </div>
+                </div>
+              ))}
+
+              <div className="feed-main-content-item">
+                <div className="tab image"></div>
+                <div className="wrapper">
+                  {groupedItems.map((item, index) => (
+                    <div className="wrapper-content" key={index}>
+                      <h6>{item.date}</h6>
+                      <h3>{item.title}</h3>
+                      <h6>
+                        {item.type} <Arrow />
+                      </h6>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {footerItem && (
+                <div className="feed-main-content-item bottom">
+                  <div className="tab">
+                    <h4>SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI</h4>
+                  </div>
+                  <div className="info">
+                    <h3>{footerItem.title}</h3>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+
+        <section className="marquee-section">
+          <div className="box">
+            <div className="marquee-tag">
+              <Marquee gradient={false} speed={40}>
+                <div className="logo-container">
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                </div>
+                <div className="logo-container">
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                  <div className="logo"></div>
+                </div>
+              </Marquee>
+            </div>
+          </div>
+        </section>
+
+        <section className="feed">
+          <div className="box">
+            <div className="feed-content">
+              <div className="feed-head">
+                <h2>Feed</h2>
+              </div>
+
+              {normalItems.map((item, index) => (
+                <div className="feed-main-content-item" key={index}>
+                  <div className="tab">
+                    <h4>{item.type}</h4>
+                  </div>
+                  <div className="info">
+                    <h6>{item.date}</h6>
+                    <h3>{item.title}</h3>
+                    <h6>
+                      {item.type} <Arrow />
+                    </h6>
+                  </div>
+                </div>
+              ))}
+
+              <div className="feed-main-content-item">
+                <div className="tab image"></div>
+                <div className="wrapper">
+                  {groupedItems.map((item, index) => (
+                    <div className="wrapper-content" key={index}>
+                      <h6>{item.date}</h6>
+                      <h3>{item.title}</h3>
+                      <h6>
+                        {item.type} <Arrow />
+                      </h6>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {footerItem && (
+                <div className="feed-main-content-item bottom">
+                  <div className="tab">
+                    <h4>SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI</h4>
+                  </div>
+                  <div className="info">
+                    <h3>{footerItem.title}</h3>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </section>
