@@ -1,10 +1,15 @@
 import "./App.css";
 import Arrow from "./assets/svgs/Arrow";
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import gsap from "gsap";
 import Header from "./components/Header";
 import Marquee from "react-fast-marquee";
 import feedData from "./data/feedData.json";
 import ScrambleText from "./components/ScrambleText";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 function App() {
   const marqueeContent = [
     { text: "SERTN AVS DEPLOYED TO EIGENLAYER TESTINET", link: "#" },
@@ -83,9 +88,78 @@ function App() {
     },
   ];
 
+  const accordionData = [
+    {
+      title: "Agentic Native Protocols",
+      content:
+        "Agents require a different set of tools at their disposal. They can't rely on trust nor determine counterparty risk without all the facts. Instead, Agents will use protocols to ensure interoperability, model authenticity, and computational integrity.",
+    },
+    {
+      title: "DATA-BACKED EXPERIENCES",
+      content:
+        "Provide peace of mind in our user experiences with verifiable data-backed function calls. Imagine using unverified smart contracts, with expectations and guarantees as an afterthought. No need to trust a black box when you see the math yourself.",
+    },
+    {
+      title: "INTEROPERABLE INTELLIGENCE",
+      content:
+        "With a system integrated into existing AI protocols, the power of AI verification is in your hands. Build cross chain applications to execute AI workflows with guarantees of atomic operations.",
+    },
+    {
+      title: "ETHICAL ADVANCEMENTS",
+      content:
+        "What's out of sight is actually top of mind. Responsible AI faces a myriad of challenges, from securing patient and client data to ensuring explainability in AI inference. Empower those affected by AI predictions to challenge or alter future outcomes using technologies such as Zero-Knowledge Machine Learning (zkML) and Fully Homomorphic Encryption (FHE).",
+    },
+    {
+      title: "INFERENCE COMMERCE PROTOCOLS",
+      content:
+        "Sertn makes it possible for projects, data scientists, and developers to easily deploy next-gen proprietary models without compromises or customer trust assumptions.",
+    },
+    {
+      title: "BUILD WITH US",
+      content: "",
+      isLink: true
+    },
+  ];
+
+  const [openIndex, setOpenIndex] = useState(0);
+
+  const toggleItem = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   const groupedItems = feedData.filter((item) => item.group);
   const normalItems = feedData.filter((item) => !item.group && !item.footer);
   const footerItem = feedData.find((item) => item.footer);
+
+
+  //manifesto animation
+ const gridRef = useRef(null);
+  const tableRef = useRef(null);
+
+  useEffect(() => {
+ let ctx = gsap.context(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: gridRef.current,
+        start: "top top",
+        end: "bottom+=100% top",
+        scrub: true,
+        pin: true,
+        markers: true,
+        // pinSpacer:false,
+        pinSpacing:false,
+      },
+    });
+
+    tl.fromTo(
+      tableRef.current,
+      { y: "0%" },
+      { y: "-60%", ease: "none" }
+    );
+  });
+
+  return () => ctx.revert();
+  }, []);
 
 
   return (
@@ -155,35 +229,39 @@ function App() {
                   <ScrambleText text="Manifesto" />
                 </h2>
               </div>
-              <div className="manifesto-grid">
+              <div className="manifesto-grid"  ref={gridRef}>
                 <div className="m-left"></div>
                 <div className="m-center">
                   <p>
-                    <ScrambleText
-                      text="We believe in a future were AI is sovereign by default and governed by cryptographic certainty over centralized authorities."
-                    />
+                    <ScrambleText text="We believe in a future were AI is sovereign by default and governed by cryptographic certainty over centralized authorities." />
                   </p>
                   <p>
-                    <ScrambleText
-                      text="Where new economies are decentralized by design and computation integrity is native to protocols."
-                    />
+                    <ScrambleText text="Where new economies are decentralized by design and computation integrity is native to protocols." />
                   </p>
                 </div>
                 <div className="m-right"></div>
               </div>
-              <div className="manifesto-table">
+              <div    className="sticky-wrapper">
+              <div ref={tableRef}  className="manifesto-table">
                 {manifesto.map((item) => (
                   <div key={item.id} className="manifesto-item">
                     <div className="left-column">
-                      <span className="item-number"><ScrambleText text={item.id} /></span>
-                      <h2 className="item-title"><ScrambleText text={item.title} /></h2>
+                      <span className="item-number">
+                        <ScrambleText text={item.id} />
+                      </span>
+                      <h2 className="item-title">
+                        <ScrambleText text={item.title} />
+                      </h2>
                     </div>
 
                     <div className="right-column">
-                      <p><ScrambleText text={item.description} /> </p>
+                      <p>
+                        <ScrambleText text={item.description} />{" "}
+                      </p>
                     </div>
                   </div>
                 ))}
+              </div>
               </div>
             </div>
           </div>
@@ -219,128 +297,45 @@ function App() {
           <div className="box">
             <div className="features-content">
               <div className="features-head">
-                <h2><ScrambleText text="Features" /></h2>
+                <h2>
+                  <ScrambleText text="Features" />
+                </h2>
                 <div className="line"></div>
                 <div className="line"></div>
               </div>
+
               <div className="features-main-container">
                 <div className="accordion">
-                  <div className="accordion-item">
-                    <h3>Agentic Native Protocols</h3>
-                    <p>
-                      Agents require a different set of tools at their disposal.
-                      They can't rely on trust nor determine counterparty risk
-                      without all the facts. Instead, Agents will use protocols
-                      to ensure interoperability, model authenticity, and
-                      computational integrity.
-                    </p>
-                  </div>
-                  <div className="accordion-item">
-                    <h3 className="inactive">DATA-BACKED EXPERIENCES</h3>
-                    <p className="hide">
-                      Provide peace of mind in our user experiences with
-                      verifiable data-backed function calls. Imagine using
-                      unverified smart contracts, with expectations and
-                      guarantees as an afterthought. No need to trust a black
-                      box when you see the math yourself.
-                    </p>
-                  </div>
-                  <div className="accordion-item">
-                    <h3 className="inactive">
-                      Agentic Native PrINTEROPERABLE INTELLIGENCEotocols
-                    </h3>
-                    <p className="hide">
-                      With a system integrated into existing AI protocols, the
-                      power of AI verification is in your hands. Build cross
-                      chain applications to execute AI workflows with guarantees
-                      of atomic operations.
-                    </p>
-                  </div>
-                  <div className="accordion-item">
-                    <h3 className="inactive">ETHICAL ADVANCEMENTS</h3>
-                    <p className="hide">
-                      What's out of sight is actually top of mind. Responsible
-                      AI faces a myriad of challenges, from securing patient and
-                      client data to ensuring explainability in AI inference.
-                      Empower those affected by AI predictions to challenge or
-                      alter future outcomes using technologies such as
-                      Zero-Knowledge Machine Learning (zkML) and Fully
-                      Homomorphic Encryption (FHE).
-                    </p>
-                  </div>
-                  <div className="accordion-item">
-                    <h3 className="inactive">INFERENCE COMMERCE PROTOCOLS</h3>
-                    <p className="hide">
-                      Sertn makes it possible for projects, data scientists, and
-                      developers to easily deploy next-gen proprietary models
-                      without compromises or customer trust assumptions.
-                    </p>
-                  </div>
-                  <div className="accordion-item">
+                  {accordionData.map((item, index) => (
+                
+                    <div className="accordion-item" key={index}>
+                      {item.isLink ? (    
                     <h3 className="gray">
-                      BUILD WITH US <Arrow />
+                      <ScrambleText text="BUILD WITH US"/>
+                      <Arrow />
                     </h3>
-                  </div>
-                </div>
-              </div>
-              <div className="features-main-container">
-                <div className="accordion">
-                  <div className="accordion-item">
-                    <h3>Agentic Native Protocols</h3>
-                    <p>
-                      Agents require a different set of tools at their disposal.
-                      They can't rely on trust nor determine counterparty risk
-                      without all the facts. Instead, Agents will use protocols
-                      to ensure interoperability, model authenticity, and
-                      computational integrity.
-                    </p>
-                  </div>
-                  <div className="accordion-item">
-                    <h3 className="inactive">DATA-BACKED EXPERIENCES</h3>
-                    <p className="hide">
-                      Provide peace of mind in our user experiences with
-                      verifiable data-backed function calls. Imagine using
-                      unverified smart contracts, with expectations and
-                      guarantees as an afterthought. No need to trust a black
-                      box when you see the math yourself.
-                    </p>
-                  </div>
-                  <div className="accordion-item">
-                    <h3 className="inactive">
-                      Agentic Native PrINTEROPERABLE INTELLIGENCEotocols
-                    </h3>
-                    <p className="hide">
-                      With a system integrated into existing AI protocols, the
-                      power of AI verification is in your hands. Build cross
-                      chain applications to execute AI workflows with guarantees
-                      of atomic operations.
-                    </p>
-                  </div>
-                  <div className="accordion-item">
-                    <h3 className="inactive">ETHICAL ADVANCEMENTS</h3>
-                    <p className="hide">
-                      What's out of sight is actually top of mind. Responsible
-                      AI faces a myriad of challenges, from securing patient and
-                      client data to ensuring explainability in AI inference.
-                      Empower those affected by AI predictions to challenge or
-                      alter future outcomes using technologies such as
-                      Zero-Knowledge Machine Learning (zkML) and Fully
-                      Homomorphic Encryption (FHE).
-                    </p>
-                  </div>
-                  <div className="accordion-item">
-                    <h3 className="inactive">INFERENCE COMMERCE PROTOCOLS</h3>
-                    <p className="hide">
-                      Sertn makes it possible for projects, data scientists, and
-                      developers to easily deploy next-gen proprietary models
-                      without compromises or customer trust assumptions.
-                    </p>
-                  </div>
-                  <div className="accordion-item">
-                    <h3 className="gray">
-                      BUILD WITH US <Arrow />
-                    </h3>
-                  </div>
+                ) : (   <h3
+                        className={openIndex === index ? "" : "inactive"}
+                        onClick={() => toggleItem(index)}
+                 
+                      >
+                          <ScrambleText text={item.title} />
+                       
+                      </h3>)}
+                   
+                      {item.content && (
+                        <p
+                          className={
+                            openIndex === index
+                              ? "show"
+                              : ""
+                          }
+                        >
+                          <ScrambleText text={item.content} />
+                        </p>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -386,19 +381,19 @@ function App() {
           <div className="box">
             <div className="feed-content">
               <div className="feed-head">
-                <h2>Feed</h2>
+                <h2><ScrambleText text="Feed" /></h2>
               </div>
 
               {normalItems.map((item, index) => (
                 <div className="feed-main-content-item" key={index}>
                   <div className="tab">
-                    <h4>{item.type}</h4>
+                    <h4><ScrambleText text={item.type} /></h4>
                   </div>
                   <div className="info">
-                    <h6>{item.date}</h6>
-                    <h3>{item.title}</h3>
+                    <h6><ScrambleText text={item.date} /></h6>
+                    <h3><ScrambleText text={item.title} /></h3>
                     <h6>
-                      {item.type} <Arrow />
+                      <ScrambleText text={item.type} /> <Arrow />
                     </h6>
                   </div>
                 </div>
@@ -409,10 +404,10 @@ function App() {
                 <div className="wrapper">
                   {groupedItems.map((item, index) => (
                     <div className="wrapper-content" key={index}>
-                      <h6>{item.date}</h6>
-                      <h3>{item.title}</h3>
+                      <h6><ScrambleText text={item.date} /></h6>
+                      <h3><ScrambleText text={item.title} /></h3>
                       <h6>
-                        {item.type} <Arrow />
+                        <ScrambleText text={item.type} /> <Arrow />
                       </h6>
                     </div>
                   ))}
@@ -422,96 +417,10 @@ function App() {
               {footerItem && (
                 <div className="feed-main-content-item bottom">
                   <div className="tab">
-                    <h4>SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI</h4>
+                    <h4><ScrambleText text="SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI"/></h4>
                   </div>
                   <div className="info">
-                    <h3>{footerItem.title}</h3>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-
-        <section className="marquee-section">
-          <div className="box">
-            <div className="marquee-tag">
-              <Marquee gradient={false} speed={40}>
-                <div className="logo-container">
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                </div>
-                <div className="logo-container">
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                </div>
-              </Marquee>
-            </div>
-          </div>
-        </section>
-
-        <section className="feed">
-          <div className="box">
-            <div className="feed-content">
-              <div className="feed-head">
-                <h2>Feed</h2>
-              </div>
-
-              {normalItems.map((item, index) => (
-                <div className="feed-main-content-item" key={index}>
-                  <div className="tab">
-                    <h4>{item.type}</h4>
-                  </div>
-                  <div className="info">
-                    <h6>{item.date}</h6>
-                    <h3>{item.title}</h3>
-                    <h6>
-                      {item.type} <Arrow />
-                    </h6>
-                  </div>
-                </div>
-              ))}
-
-              <div className="feed-main-content-item">
-                <div className="tab image"></div>
-                <div className="wrapper">
-                  {groupedItems.map((item, index) => (
-                    <div className="wrapper-content" key={index}>
-                      <h6>{item.date}</h6>
-                      <h3>{item.title}</h3>
-                      <h6>
-                        {item.type} <Arrow />
-                      </h6>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {footerItem && (
-                <div className="feed-main-content-item bottom">
-                  <div className="tab">
-                    <h4>SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI</h4>
-                  </div>
-                  <div className="info">
-                    <h3>{footerItem.title}</h3>
+                    <h3><ScrambleText text={footerItem.title} /></h3>
                   </div>
                 </div>
               )}
