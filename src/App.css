@@ -1,6 +1,106 @@
 .sertn-ai {
   width: 100%;
   overflow-x: hidden;
+   background: transparent;
+   white-space: normal;
+}
+.sertn-ai::after {
+  content: ' ';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(18, 16, 16, 0.1);
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  animation: flicker 0.000009s infinite;
+}
+.sertn-ai::before {
+  content: ' ';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.06),
+      rgba(0, 255, 0, 0.02),
+      rgba(0, 0, 255, 0.06)
+    );
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+@keyframes flicker {
+  0% {
+    opacity: 0.06965;
+  }
+  5% {
+    opacity: 0.08692;
+  }
+  10% {
+    opacity: 0.05901;
+  }
+  15% {
+    opacity: 0.22657;
+  }
+  20% {
+    opacity: 0.04532;
+  }
+  25% {
+    opacity: 0.20973;
+  }
+  30% {
+    opacity: 0.16396;
+  }
+  35% {
+    opacity: 0.16952;
+  }
+  40% {
+    opacity: 0.06640;
+  }
+  45% {
+    opacity: 0.21173;
+  }
+  50% {
+    opacity: 0.24005;
+  }
+  55% {
+    opacity: 0.02149;
+  }
+  60% {
+    opacity: 0.05078;
+  }
+  65% {
+    opacity: 0.17997;
+  }
+  70% {
+    opacity: 0.13364;
+  }
+  75% {
+    opacity: 0.09322;
+  }
+  80% {
+    opacity: 0.17857;
+  }
+  85% {
+    opacity: 0.17605;
+  }
+  90% {
+    opacity: 0.17508;
+  }
+  95% {
+    opacity: 0.09027;
+  }
+  100% {
+    opacity: 0.06097;
+  }
 }
 
 main {
@@ -32,7 +132,7 @@ main {
 .hero-content .top h1 {
 font-weight: 400;
 font-size: 10rem;
-line-height: 120px;
+    line-height: 0.6;
 letter-spacing: -2%;
 vertical-align: middle;
 color: var(--black);
@@ -72,11 +172,14 @@ text-transform: uppercase;
 font-weight: 400;
 font-size: 1.2rem;
 
-position: absolute;
-    bottom: 1rem;
-    right: 2rem;
+
 color: #7E838D;
 
+}
+.code{
+  position: absolute;
+    bottom: 1rem;
+    right: 2rem;
 }
 .marquee-section{
   width: 100%;
@@ -231,7 +334,11 @@ letter-spacing: -5%;
 vertical-align: middle;
 color: #1E1E1E;
   }
-    .features-head div{
+    .features-head .line{
       width: 100%;
         border-right: 1px solid var(--gray-1);
     }
+
+
+
+

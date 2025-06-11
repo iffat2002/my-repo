@@ -1,4 +1,5 @@
 import "../styles/components/header.css";
+import ScrambleText from "./ScrambleText";
 
 const Header = () => {
   return (
@@ -7,8 +8,8 @@ const Header = () => {
         <div className="header-content">
             <div className="left-side">
                 <div className="logo"></div>
-                <a>DOCS</a>
-                <a className="second-link">WHITEPAPER</a>
+                <a><ScrambleText text="DOCS" /></a>
+                <a className="second-link"><ScrambleText text="WHITEPAPER" /> </a>
             </div>
             <div className="right-side">
                 <div className="social-icon"></div>
