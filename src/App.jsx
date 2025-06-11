@@ -270,7 +270,7 @@ function App() {
                   </div>
                   <div className="accordion-item">
                     <h3 className="inactive">
-                      Agentic Native PrINTEROPERABLE INTELLIGENCEotocols
+                      INTEROPERABLE INTELLIGENCE
                     </h3>
                     <p className="hide">
                       With a system integrated into existing AI protocols, the
