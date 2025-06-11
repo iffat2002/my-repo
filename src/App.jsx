@@ -15,6 +15,7 @@ import CompanyLogo3 from "./assets/imgs/CompanyLogo3.png";
 import CompanyLogo4 from "./assets/imgs/CompanyLogo4.png";
 import CompanyLogo5 from "./assets/imgs/CompanyLogo5.png";
 
+import ScrambleText from "./components/ScrambleText";
 function App() {
   const marqueeContent = [
     { text: "SERTN AVS DEPLOYED TO EIGENLAYER TESTINET", link: "#" },
@@ -97,6 +98,7 @@ function App() {
   const normalItems = feedData.filter((item) => !item.group && !item.footer);
   const footerItem = feedData.find((item) => item.footer);
 
+
   return (
     <div className="sertn-ai">
       <main>
@@ -105,7 +107,13 @@ function App() {
           <div className="box">
             <div className="hero-content">
               <div className="top">
-                <h1>AI hyperscale on decentralized networks</h1>
+                <h1>
+                  <ScrambleText text="AI hyperscale on" />
+                  {/* <br /> */}
+                  <ScrambleText text="decentralized" />
+                  {/* <br /> */}
+                  <ScrambleText text="networks" />
+                </h1>
                 <div className="image">
                   <img src={HeroImg} alt="hero" />
                 </div>
@@ -116,10 +124,15 @@ function App() {
                 </div>
                 <div className="right-content">
                   <h3 className="h-bottom-text">
-                    WE PROVIDE CERTAINTY FOR ON-CHAIN AI{" "}
+                    <ScrambleText text="WE PROVIDE CERTAINTY FOR ON-CHAIN AI" />
                   </h3>
                   <div className="h-bottom-code">
-                    <span>JB 572046741</span>
+                    <div className="code">
+                      <span>
+                        {" "}
+                        <ScrambleText text="JB 572046741" />
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -153,7 +166,9 @@ function App() {
           <div className="box">
             <div className="manifesto-content">
               <div className="manifesto-head">
-                <h2>Manifesto</h2>
+                <h2>
+                  <ScrambleText text="Manifesto" />
+                </h2>
               </div>
               <div className="manifesto-grid">
                 <div className="m-left">
@@ -161,13 +176,14 @@ function App() {
                 </div>
                 <div className="m-center">
                   <p>
-                    We believe in a future were AI is sovereign by default and
-                    governed by cryptographic certainty over centralized
-                    authorities.
+                    <ScrambleText
+                      text="We believe in a future were AI is sovereign by default and governed by cryptographic certainty over centralized authorities."
+                    />
                   </p>
                   <p>
-                    Where new economies are decentralized by design and
-                    computation integrity is native to protocols.
+                    <ScrambleText
+                      text="Where new economies are decentralized by design and computation integrity is native to protocols."
+                    />
                   </p>
                 </div>
                 <div className="m-right">
@@ -178,12 +194,12 @@ function App() {
                 {manifesto.map((item) => (
                   <div key={item.id} className="manifesto-item">
                     <div className="left-column">
-                      <span className="item-number">{item.id}</span>
-                      <h2 className="item-title">{item.title}</h2>
+                      <span className="item-number"><ScrambleText text={item.id} /></span>
+                      <h2 className="item-title"><ScrambleText text={item.title} /></h2>
                     </div>
-                    {/* Right Column: Contains the description */}
+
                     <div className="right-column">
-                      <p>{item.description}</p>
+                      <p><ScrambleText text={item.description} /> </p>
                     </div>
                   </div>
                 ))}
@@ -226,9 +242,9 @@ function App() {
           <div className="box">
             <div className="features-content">
               <div className="features-head">
-                <h2>Features</h2>
-                <div></div>
-                <div></div>
+                <h2><ScrambleText text="Features" /></h2>
+                <div className="line"></div>
+                <div className="line"></div>
               </div>
               <div className="features-main-container">
                 <div className="accordion">
@@ -253,7 +269,9 @@ function App() {
                     </p>
                   </div>
                   <div className="accordion-item">
-                    <h3 className="inactive">INTEROPERABLE INTELLIGENCE</h3>
+                    <h3 className="inactive">
+                      Agentic Native PrINTEROPERABLE INTELLIGENCEotocols
+                    </h3>
                     <p className="hide">
                       With a system integrated into existing AI protocols, the
                       power of AI verification is in your hands. Build cross
@@ -424,6 +442,7 @@ function App() {
             </div>
           </div>
         </section>
+
       </main>
     </div>
   );

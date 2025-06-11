@@ -1,0 +1,29 @@
+.scramble-text {
+  white-space: pre-wrap;
+}
+
+.char {
+  display: inline-block;
+  width: 0.5em;
+  text-align: center;
+  font-family: monospace;
+  transition: color 0.3s ease;
+}
+
+.char.scrambling {
+  animation: chromatic 0.4s infinite;
+  color: #ffffff;
+}
+.word {
+  white-space: nowrap;
+  display: inline-block;
+}
+
+@keyframes chromatic {
+  0%   { text-shadow: 1px 0 red, -1px 0 cyan; }
+  25%  { text-shadow: -1px 1px blue, 1px -1px lime; }
+  50%  { text-shadow: 0 0 red, 0 0 cyan; }
+  75%  { text-shadow: 2px 0 magenta, -2px 0 green; }
+  100% { text-shadow: 1px 0 red, -1px 0 cyan; }
+}
+  
