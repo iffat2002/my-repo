@@ -1,3 +1,4 @@
+import Moon from "../assets/svgs/Moon";
 import "../styles/components/header.css";
 
 const Header = () => {
@@ -11,10 +12,18 @@ const Header = () => {
                 <a className="second-link">WHITEPAPER</a>
             </div>
             <div className="right-side">
-                <div className="social-icon"></div>
-                <div className="social-icon"></div>
-                <div className="social-icon"></div>
-                <div className="social-icon"></div>
+                <div className="social-icon">
+                  <Moon />
+                </div>
+                 <div className="social-icon">
+                  <Moon />
+                </div>
+                 <div className="social-icon">
+                  <Moon />
+                </div>
+                 <div className="social-icon">
+                  <Moon />
+                </div>
             </div>
         </div>
       </div>

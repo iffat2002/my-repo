@@ -3,14 +3,26 @@ import Arrow from "./assets/svgs/Arrow";
 import Header from "./components/Header";
 import Marquee from "react-fast-marquee";
 import feedData from "./data/feedData.json";
+import HeroImg from "./assets/imgs/HeroImg.png";
+import HeroBottom from "./assets/imgs/HeroBottom.png";
+import ManifestoLeft from "./assets/imgs/ManifestoLeft.png";
+import ManifestoRight from "./assets/imgs/ManifestoRight.png";
+import FeedLeft from "./assets/imgs/FeedLeft.png";
+import FeedRight from "./assets/imgs/FeedRight.png";
+import CompanyLogo1 from "./assets/imgs/CompanyLogo1.png";
+import CompanyLogo2 from "./assets/imgs/CompanyLogo2.png";
+import CompanyLogo3 from "./assets/imgs/CompanyLogo3.png";
+import CompanyLogo4 from "./assets/imgs/CompanyLogo4.png";
+import CompanyLogo5 from "./assets/imgs/CompanyLogo5.png";
+
 function App() {
   const marqueeContent = [
     { text: "SERTN AVS DEPLOYED TO EIGENLAYER TESTINET", link: "#" },
-    { text: "TAKE ME THERE", icon: "→", link: "#" },
+    { text: "TAKE ME THERE", icon: <Arrow />, link: "#" },
     { text: "OMRON - BITTENSOR SUBNET 2 IS LIVE ON MAINNET", link: "#" },
-    { text: "OMRON AI", icon: "→", link: "#" },
+    { text: "OMRON AI", icon: <Arrow />, link: "#" },
     { text: "SERTN AVS DEPLOYED TO EIGENLAYER TESTINET", link: "#" },
-    { text: "TAKE ME THERE", icon: "→", link: "#" },
+    { text: "TAKE ME THERE", icon: <Arrow />, link: "#" },
   ];
 
   const manifesto = [
@@ -94,10 +106,14 @@ function App() {
             <div className="hero-content">
               <div className="top">
                 <h1>AI hyperscale on decentralized networks</h1>
-                <div className="image"></div>
+                <div className="image">
+                  <img src={HeroImg} alt="hero" />
+                </div>
               </div>
               <div className="bottom">
-                <div className="image"></div>
+                <div className="image">
+                  <img src={HeroBottom} alt="" />
+                </div>
                 <div className="right-content">
                   <h3 className="h-bottom-text">
                     WE PROVIDE CERTAINTY FOR ON-CHAIN AI{" "}
@@ -113,7 +129,7 @@ function App() {
         <section className="marquee-section">
           <div className="box">
             <div className="marquee-tag">
-              <Marquee gradient={false} speed={40}>
+              <Marquee gradient={false} speed={200}>
                 {marqueeContent.map((item, index) => (
                   <div key={index}>
                     <div className={`tag ${index % 2 === 0 ? "gray-tag" : ""}`}>
@@ -140,7 +156,9 @@ function App() {
                 <h2>Manifesto</h2>
               </div>
               <div className="manifesto-grid">
-                <div className="m-left"></div>
+                <div className="m-left">
+                  <img src={ManifestoLeft} alt="" />
+                </div>
                 <div className="m-center">
                   <p>
                     We believe in a future were AI is sovereign by default and
@@ -152,7 +170,9 @@ function App() {
                     computation integrity is native to protocols.
                   </p>
                 </div>
-                <div className="m-right"></div>
+                <div className="m-right">
+                  <img src={ManifestoRight} alt="" />
+                </div>
               </div>
               <div className="manifesto-table">
                 {manifesto.map((item) => (
@@ -175,7 +195,7 @@ function App() {
         <section className="marquee-section">
           <div className="box">
             <div className="marquee-tag">
-              <Marquee gradient={false} speed={40}>
+              <Marquee gradient={false} speed={200}>
                 {marquee02.map((item, index) => (
                   <div key={index}>
                     <div
@@ -187,7 +207,11 @@ function App() {
                         <a href={item.link}>
                           {item.text}
                           <span>{item.value}</span>
-                          {item.isLink && <span>→</span>}
+                          {item.isLink && (
+                            <span>
+                              <Arrow />
+                            </span>
+                          )}
                         </a>
                       ) : null}
                     </div>
@@ -229,9 +253,7 @@ function App() {
                     </p>
                   </div>
                   <div className="accordion-item">
-                    <h3 className="inactive">
-                      Agentic Native PrINTEROPERABLE INTELLIGENCEotocols
-                    </h3>
+                    <h3 className="inactive">INTEROPERABLE INTELLIGENCE</h3>
                     <p className="hide">
                       With a system integrated into existing AI protocols, the
                       power of AI verification is in your hands. Build cross
@@ -273,32 +295,74 @@ function App() {
         <section className="marquee-section">
           <div className="box">
             <div className="marquee-tag">
-              <Marquee gradient={false} speed={40}>
+              <Marquee gradient={false} speed={200}>
                 <div className="logo-container">
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
+                  <div className="logo">
+                    <img src={CompanyLogo1} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo2} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo3} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo4} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo5} alt="" />
+                  </div>
                 </div>
                 <div className="logo-container">
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
+                  <div className="logo">
+                    <img src={CompanyLogo1} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo2} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo3} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo4} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo5} alt="" />
+                  </div>
+                </div>
+                <div className="logo-container">
+                  <div className="logo">
+                    <img src={CompanyLogo1} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo2} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo3} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo4} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo5} alt="" />
+                  </div>
+                </div>
+                <div className="logo-container">
+                  <div className="logo">
+                    <img src={CompanyLogo1} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo2} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo3} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo4} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo5} alt="" />
+                  </div>
                 </div>
               </Marquee>
             </div>
@@ -328,7 +392,9 @@ function App() {
               ))}
 
               <div className="feed-main-content-item">
-                <div className="tab image"></div>
+                <div className="tab image">
+                  <img src={FeedLeft} alt="" />
+                </div>
                 <div className="wrapper">
                   {groupedItems.map((item, index) => (
                     <div className="wrapper-content" key={index}>
@@ -339,6 +405,9 @@ function App() {
                       </h6>
                     </div>
                   ))}
+                </div>
+                <div className="feed-right">
+                  <img src={FeedRight} alt="" />
                 </div>
               </div>
 
