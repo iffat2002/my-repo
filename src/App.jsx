@@ -5,6 +5,18 @@ import gsap from "gsap";
 import Header from "./components/Header";
 import Marquee from "react-fast-marquee";
 import feedData from "./data/feedData.json";
+import HeroImg from "./assets/imgs/HeroImg.png";
+import HeroBottom from "./assets/imgs/HeroBottom.png";
+import ManifestoLeft from "./assets/imgs/ManifestoLeft.png";
+import ManifestoRight from "./assets/imgs/ManifestoRight.png";
+import FeedLeft from "./assets/imgs/FeedLeft.png";
+import FeedRight from "./assets/imgs/FeedRight.png";
+import CompanyLogo1 from "./assets/imgs/CompanyLogo1.png";
+import CompanyLogo2 from "./assets/imgs/CompanyLogo2.png";
+import CompanyLogo3 from "./assets/imgs/CompanyLogo3.png";
+import CompanyLogo4 from "./assets/imgs/CompanyLogo4.png";
+import CompanyLogo5 from "./assets/imgs/CompanyLogo5.png";
+
 import ScrambleText from "./components/ScrambleText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -13,11 +25,11 @@ gsap.registerPlugin(ScrollTrigger);
 function App() {
   const marqueeContent = [
     { text: "SERTN AVS DEPLOYED TO EIGENLAYER TESTINET", link: "#" },
-    { text: "TAKE ME THERE", icon: "→", link: "#" },
+    { text: "TAKE ME THERE", icon: <Arrow />, link: "#" },
     { text: "OMRON - BITTENSOR SUBNET 2 IS LIVE ON MAINNET", link: "#" },
-    { text: "OMRON AI", icon: "→", link: "#" },
+    { text: "OMRON AI", icon: <Arrow />, link: "#" },
     { text: "SERTN AVS DEPLOYED TO EIGENLAYER TESTINET", link: "#" },
-    { text: "TAKE ME THERE", icon: "→", link: "#" },
+    { text: "TAKE ME THERE", icon: <Arrow />, link: "#" },
   ];
 
   const manifesto = [
@@ -172,15 +184,19 @@ function App() {
               <div className="top">
                 <h1>
                   <ScrambleText text="AI hyperscale on" />
-                  <br />
+                  {/* <br /> */}
                   <ScrambleText text="decentralized" />
-                  <br />
+                  {/* <br /> */}
                   <ScrambleText text="networks" />
                 </h1>
-                <div className="image"></div>
+                <div className="image">
+                  <img src={HeroImg} alt="hero" />
+                </div>
               </div>
               <div className="bottom">
-                <div className="image"></div>
+                <div className="image">
+                  <img src={HeroBottom} alt="" />
+                </div>
                 <div className="right-content">
                   <h3 className="h-bottom-text">
                     <ScrambleText text="WE PROVIDE CERTAINTY FOR ON-CHAIN AI" />
@@ -201,7 +217,7 @@ function App() {
         <section className="marquee-section">
           <div className="box">
             <div className="marquee-tag">
-              <Marquee gradient={false} speed={40}>
+              <Marquee gradient={false} speed={200}>
                 {marqueeContent.map((item, index) => (
                   <div key={index}>
                     <div className={`tag ${index % 2 === 0 ? "gray-tag" : ""}`}>
@@ -229,6 +245,10 @@ function App() {
                   <ScrambleText text="Manifesto" />
                 </h2>
               </div>
+              <div className="manifesto-grid">
+                <div className="m-left">
+                  <img src={ManifestoLeft} alt="" />
+                </div>
               <div className="manifesto-grid"  ref={gridRef}>
                 <div className="m-left"></div>
                 <div className="m-center">
@@ -239,7 +259,9 @@ function App() {
                     <ScrambleText text="Where new economies are decentralized by design and computation integrity is native to protocols." />
                   </p>
                 </div>
-                <div className="m-right"></div>
+                <div className="m-right">
+                  <img src={ManifestoRight} alt="" />
+                </div>
               </div>
               <div    className="sticky-wrapper">
               <div ref={tableRef}  className="manifesto-table">
@@ -265,12 +287,13 @@ function App() {
               </div>
             </div>
           </div>
+          </div>
         </section>
 
         <section className="marquee-section">
           <div className="box">
             <div className="marquee-tag">
-              <Marquee gradient={false} speed={40}>
+              <Marquee gradient={false} speed={200}>
                 {marquee02.map((item, index) => (
                   <div key={index}>
                     <div
@@ -282,7 +305,11 @@ function App() {
                         <a href={item.link}>
                           {item.text}
                           <span>{item.value}</span>
-                          {item.isLink && <span>→</span>}
+                          {item.isLink && (
+                            <span>
+                              <Arrow />
+                            </span>
+                          )}
                         </a>
                       ) : null}
                     </div>
@@ -345,32 +372,81 @@ function App() {
         <section className="marquee-section">
           <div className="box">
             <div className="marquee-tag">
-              <Marquee gradient={false} speed={40}>
+              <Marquee gradient={false} speed={200}>
                 <div className="logo-container">
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
+                  <div className="logo">
+                    <img src={CompanyLogo1} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo2} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo3} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo4} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo5} alt="" />
+                  </div>
                 </div>
                 <div className="logo-container">
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
-                  <div className="logo"></div>
+                  <div className="logo">
+                    <img src={CompanyLogo1} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo2} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo3} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo4} alt="" />
+                  </div>
+                  </div>
+                  <div className="info">
+                    <h6><ScrambleText text={item.date} /></h6>
+                    <h3><ScrambleText text={item.title} /></h3>
+                    <h6>
+                      <ScrambleText text={item.type} /> <Arrow />
+                    </h6>
+                  <div className="logo">
+                    <img src={CompanyLogo5} alt="" />
+                  </div>
+                </div>
+                <div className="logo-container">
+                  <div className="logo">
+                    <img src={CompanyLogo1} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo2} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo3} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo4} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo5} alt="" />
+                  </div>
+                </div>
+                <div className="logo-container">
+                  <div className="logo">
+                    <img src={CompanyLogo1} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo2} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo3} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo4} alt="" />
+                  </div>
+                  <div className="logo">
+                    <img src={CompanyLogo5} alt="" />
+                  </div>
                 </div>
               </Marquee>
             </div>
@@ -381,52 +457,58 @@ function App() {
           <div className="box">
             <div className="feed-content">
               <div className="feed-head">
-                <h2><ScrambleText text="Feed" /></h2>
+                <h2>Feed</h2>
               </div>
 
               {normalItems.map((item, index) => (
                 <div className="feed-main-content-item" key={index}>
                   <div className="tab">
-                    <h4><ScrambleText text={item.type} /></h4>
+                    <h4>{item.type}</h4>
                   </div>
                   <div className="info">
-                    <h6><ScrambleText text={item.date} /></h6>
-                    <h3><ScrambleText text={item.title} /></h3>
+                    <h6>{item.date}</h6>
+                    <h3>{item.title}</h3>
                     <h6>
-                      <ScrambleText text={item.type} /> <Arrow />
+                      {item.type} <Arrow />
                     </h6>
                   </div>
                 </div>
               ))}
 
               <div className="feed-main-content-item">
-                <div className="tab image"></div>
+                <div className="tab image">
+                  <img src={FeedLeft} alt="" />
+                </div>
                 <div className="wrapper">
                   {groupedItems.map((item, index) => (
                     <div className="wrapper-content" key={index}>
-                      <h6><ScrambleText text={item.date} /></h6>
-                      <h3><ScrambleText text={item.title} /></h3>
+                      <h6>{item.date}</h6>
+                      <h3>{item.title}</h3>
                       <h6>
-                        <ScrambleText text={item.type} /> <Arrow />
+                        {item.type} <Arrow />
                       </h6>
                     </div>
                   ))}
+                </div>
+                <div className="feed-right">
+                  <img src={FeedRight} alt="" />
                 </div>
               </div>
 
               {footerItem && (
                 <div className="feed-main-content-item bottom">
                   <div className="tab">
-                    <h4><ScrambleText text="SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI"/></h4>
+                    <h4>SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI</h4>
                   </div>
                   <div className="info">
-                    <h3><ScrambleText text={footerItem.title} /></h3>
+                    <h3>{footerItem.title}</h3>
                   </div>
                 </div>
               )}
             </div>
           </div>
         </section>
+
       </main>
     </div>
   );
