@@ -223,6 +223,126 @@ function App() {
                 <div className="line"></div>
                 <div className="line"></div>
               </div>
+              <div className="features-main-container">
+                <div className="accordion">
+                  <div className="accordion-item">
+                    <h3>Agentic Native Protocols</h3>
+                    <p>
+                      Agents require a different set of tools at their disposal.
+                      They can't rely on trust nor determine counterparty risk
+                      without all the facts. Instead, Agents will use protocols
+                      to ensure interoperability, model authenticity, and
+                      computational integrity.
+                    </p>
+                  </div>
+                  <div className="accordion-item">
+                    <h3 className="inactive">DATA-BACKED EXPERIENCES</h3>
+                    <p className="hide">
+                      Provide peace of mind in our user experiences with
+                      verifiable data-backed function calls. Imagine using
+                      unverified smart contracts, with expectations and
+                      guarantees as an afterthought. No need to trust a black
+                      box when you see the math yourself.
+                    </p>
+                  </div>
+                  <div className="accordion-item">
+                    <h3 className="inactive">
+                      Agentic Native PrINTEROPERABLE INTELLIGENCEotocols
+                    </h3>
+                    <p className="hide">
+                      With a system integrated into existing AI protocols, the
+                      power of AI verification is in your hands. Build cross
+                      chain applications to execute AI workflows with guarantees
+                      of atomic operations.
+                    </p>
+                  </div>
+                  <div className="accordion-item">
+                    <h3 className="inactive">ETHICAL ADVANCEMENTS</h3>
+                    <p className="hide">
+                      What's out of sight is actually top of mind. Responsible
+                      AI faces a myriad of challenges, from securing patient and
+                      client data to ensuring explainability in AI inference.
+                      Empower those affected by AI predictions to challenge or
+                      alter future outcomes using technologies such as
+                      Zero-Knowledge Machine Learning (zkML) and Fully
+                      Homomorphic Encryption (FHE).
+                    </p>
+                  </div>
+                  <div className="accordion-item">
+                    <h3 className="inactive">INFERENCE COMMERCE PROTOCOLS</h3>
+                    <p className="hide">
+                      Sertn makes it possible for projects, data scientists, and
+                      developers to easily deploy next-gen proprietary models
+                      without compromises or customer trust assumptions.
+                    </p>
+                  </div>
+                  <div className="accordion-item">
+                    <h3 className="gray">
+                      BUILD WITH US <Arrow />
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div className="features-main-container">
+                <div className="accordion">
+                  <div className="accordion-item">
+                    <h3>Agentic Native Protocols</h3>
+                    <p>
+                      Agents require a different set of tools at their disposal.
+                      They can't rely on trust nor determine counterparty risk
+                      without all the facts. Instead, Agents will use protocols
+                      to ensure interoperability, model authenticity, and
+                      computational integrity.
+                    </p>
+                  </div>
+                  <div className="accordion-item">
+                    <h3 className="inactive">DATA-BACKED EXPERIENCES</h3>
+                    <p className="hide">
+                      Provide peace of mind in our user experiences with
+                      verifiable data-backed function calls. Imagine using
+                      unverified smart contracts, with expectations and
+                      guarantees as an afterthought. No need to trust a black
+                      box when you see the math yourself.
+                    </p>
+                  </div>
+                  <div className="accordion-item">
+                    <h3 className="inactive">
+                      Agentic Native PrINTEROPERABLE INTELLIGENCEotocols
+                    </h3>
+                    <p className="hide">
+                      With a system integrated into existing AI protocols, the
+                      power of AI verification is in your hands. Build cross
+                      chain applications to execute AI workflows with guarantees
+                      of atomic operations.
+                    </p>
+                  </div>
+                  <div className="accordion-item">
+                    <h3 className="inactive">ETHICAL ADVANCEMENTS</h3>
+                    <p className="hide">
+                      What's out of sight is actually top of mind. Responsible
+                      AI faces a myriad of challenges, from securing patient and
+                      client data to ensuring explainability in AI inference.
+                      Empower those affected by AI predictions to challenge or
+                      alter future outcomes using technologies such as
+                      Zero-Knowledge Machine Learning (zkML) and Fully
+                      Homomorphic Encryption (FHE).
+                    </p>
+                  </div>
+                  <div className="accordion-item">
+                    <h3 className="inactive">INFERENCE COMMERCE PROTOCOLS</h3>
+                    <p className="hide">
+                      Sertn makes it possible for projects, data scientists, and
+                      developers to easily deploy next-gen proprietary models
+                      without compromises or customer trust assumptions.
+                    </p>
+                  </div>
+                  <div className="accordion-item">
+                    <h3 className="gray">
+                      BUILD WITH US <Arrow />
+                    </h3>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
