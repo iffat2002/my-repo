@@ -135,9 +135,6 @@ function App() {
 
   const [openIndex, setOpenIndex] = useState(0);
 
-  const toggleItem = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
 
   const groupedItems = feedData.filter((item) => item.group);
   const normalItems = feedData.filter((item) => !item.group && !item.footer);
@@ -148,6 +145,7 @@ const wrapperRef = useRef(null);
   const tableRef = useRef(null);
 
   useEffect(() => {
+    if(window.innerWidth >= 769){
     const ctx = gsap.context(() => {
       gsap.to(".manifesto-item", {
         y: "-440px", 
@@ -164,7 +162,56 @@ const wrapperRef = useRef(null);
     }, wrapperRef);
 
     return () => ctx.revert();
+  }
   }, []);
+
+
+  const cardRefs = useRef([]);
+
+const prevIndex = useRef(null);
+const toggleItem = (index) => {
+  setOpenIndex((prev) => (prev === index ? null : index));
+};
+
+useEffect(() => {
+  // Animate closing the previous one
+  if (prevIndex.current !== null && prevIndex.current !== openIndex) {
+    const prevEl = cardRefs.current[prevIndex.current]?.querySelector(".show");
+    if (prevEl) {
+      gsap.to(prevEl, {
+  
+        opacity: 0,
+        maxHeight: 0,
+        padding: "0rem",
+        duration: 0,
+        ease: "power2.in",
+      });
+    }
+  }
+
+  // Animate opening the current one
+  if (openIndex !== null) {
+    const currentEl = cardRefs.current[openIndex]?.querySelector(".show");
+    if (currentEl) {
+      gsap.fromTo(
+        currentEl,
+        { y: -100, opacity: 0, maxHeight: 0, padding: "0rem" },
+        {
+          y: 0,
+          opacity: 1,
+          maxHeight: 1000,
+          padding: "3rem 3rem 3rem 2rem",
+          duration: 0.8,
+          
+          ease: "power2.out",
+        }
+      );
+    }
+  }
+
+  prevIndex.current = openIndex;
+}, [openIndex]);
+  
 
   return (
     <div className="sertn-ai">
@@ -325,7 +372,7 @@ const wrapperRef = useRef(null);
               <div className="features-main-container">
                 <div className="accordion">
                   {accordionData.map((item, index) => (
-                    <div className="accordion-item" key={index}>
+                    <div className="accordion-item" key={index}   ref={(el) => (cardRefs.current[index] = el)}>
                       {item.isLink ? (
                         <h3 className="gray">
                           <ScrambleText text="BUILD WITH US" />
@@ -340,11 +387,11 @@ const wrapperRef = useRef(null);
                         </h3>
                       )}
 
-                      {item.content && (
-                        <p className={openIndex === index ? "show" : ""}>
+                      {/* {item.content && ( */}
+                        <p className={openIndex === index ? "show" : "show"}>
                           <ScrambleText text={item.content} />
                         </p>
-                      )}
+                      {/* )} */}
                     </div>
                   ))}
                 </div>

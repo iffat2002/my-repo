@@ -453,7 +453,7 @@ main {
   justify-content: flex-start;
   gap: 0.5rem;
     cursor: pointer;
-  transition: background-color 0.4 ease-in;
+
 }
 .features-main-container .accordion .accordion-item h3.inactive:hover, .features-main-container .accordion .accordion-item h3.gray:hover{
     background-color: var(--purple) ;
@@ -486,14 +486,11 @@ main {
     max-height: 0;
   box-sizing: border-box;
   overflow: hidden;
-  transition: max-height 0.4s ease, opacity 0.6s ease;
+  /* transition: max-height 0.2s ease; */
   opacity: 0;
+
 }
-.features-main-container .accordion .accordion-item p.show {
-  max-height: 1000px;
-  opacity: 1;
-  padding: 3rem 3rem 3rem 2rem;
-}
+
 
 .feed {
   width: 100%;
@@ -726,4 +723,11 @@ main {
   .wrapper .wrapper-content h3 {
     font-size: 1.65rem;
   }
+}
+
+
+@media only screen and (max-width: 768px) {
+.manifesto-table{
+  height: auto;
+}
 }
