@@ -129,7 +129,7 @@ function App() {
     {
       title: "BUILD WITH US",
       content: "",
-      isLink: true
+      isLink: true,
     },
   ];
 
@@ -143,36 +143,28 @@ function App() {
   const normalItems = feedData.filter((item) => !item.group && !item.footer);
   const footerItem = feedData.find((item) => item.footer);
 
-
   //manifesto animation
- const gridRef = useRef(null);
+const wrapperRef = useRef(null);
   const tableRef = useRef(null);
 
   useEffect(() => {
- let ctx = gsap.context(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: gridRef.current,
-        start: "top top",
-        end: "bottom+=100% top",
-        scrub: true,
-        pin: true,
-        markers: true,
-        // pinSpacer:false,
-        pinSpacing:false,
-      },
-    });
+    const ctx = gsap.context(() => {
+      gsap.to(".manifesto-item", {
+        y: "-440px", 
+        delay:0.4,
+        ease: "none",
+        scrollTrigger: {
+          trigger: wrapperRef.current,
+          start: "top top",
+          // end: () => `+=400px`,
+          pin: true,
+          scrub: true,
+        },
+      });
+    }, wrapperRef);
 
-    tl.fromTo(
-      tableRef.current,
-      { y: "0%" },
-      { y: "-60%", ease: "none" }
-    );
-  });
-
-  return () => ctx.revert();
+    return () => ctx.revert();
   }, []);
-
 
   return (
     <div className="sertn-ai">
@@ -245,12 +237,12 @@ function App() {
                   <ScrambleText text="Manifesto" />
                 </h2>
               </div>
+                <div className="sticky-wrapper" ref={wrapperRef}>
               <div className="manifesto-grid">
                 <div className="m-left">
                   <img src={ManifestoLeft} alt="" />
                 </div>
-              <div className="manifesto-grid"  ref={gridRef}>
-                <div className="m-left"></div>
+
                 <div className="m-center">
                   <p>
                     <ScrambleText text="We believe in a future were AI is sovereign by default and governed by cryptographic certainty over centralized authorities." />
@@ -263,30 +255,29 @@ function App() {
                   <img src={ManifestoRight} alt="" />
                 </div>
               </div>
-              <div    className="sticky-wrapper">
-              <div ref={tableRef}  className="manifesto-table">
-                {manifesto.map((item) => (
-                  <div key={item.id} className="manifesto-item">
-                    <div className="left-column">
-                      <span className="item-number">
-                        <ScrambleText text={item.id} />
-                      </span>
-                      <h2 className="item-title">
-                        <ScrambleText text={item.title} />
-                      </h2>
-                    </div>
+            {/* applying inner scroll on this */}
+                <div ref={tableRef} className="manifesto-table">
+                  {manifesto.map((item) => (
+                    <div key={item.id} className="manifesto-item">
+                      <div className="left-column">
+                        <span className="item-number">
+                          <ScrambleText text={item.id} />
+                        </span>
+                        <h2 className="item-title">
+                          <ScrambleText text={item.title} />
+                        </h2>
+                      </div>
 
-                    <div className="right-column">
-                      <p>
-                        <ScrambleText text={item.description} />{" "}
-                      </p>
+                      <div className="right-column">
+                        <p>
+                          <ScrambleText text={item.description} />{" "}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
           </div>
         </section>
 
@@ -334,30 +325,23 @@ function App() {
               <div className="features-main-container">
                 <div className="accordion">
                   {accordionData.map((item, index) => (
-                
                     <div className="accordion-item" key={index}>
-                      {item.isLink ? (    
-                    <h3 className="gray">
-                      <ScrambleText text="BUILD WITH US"/>
-                      <Arrow />
-                    </h3>
-                ) : (   <h3
-                        className={openIndex === index ? "" : "inactive"}
-                        onClick={() => toggleItem(index)}
-                 
-                      >
-                          <ScrambleText text={item.title} />
-                       
-                      </h3>)}
-                   
-                      {item.content && (
-                        <p
-                          className={
-                            openIndex === index
-                              ? "show"
-                              : ""
-                          }
+                      {item.isLink ? (
+                        <h3 className="gray">
+                          <ScrambleText text="BUILD WITH US" />
+                          <Arrow />
+                        </h3>
+                      ) : (
+                        <h3
+                          className={openIndex === index ? "" : "inactive"}
+                          onClick={() => toggleItem(index)}
                         >
+                          <ScrambleText text={item.title} />
+                        </h3>
+                      )}
+
+                      {item.content && (
+                        <p className={openIndex === index ? "show" : ""}>
                           <ScrambleText text={item.content} />
                         </p>
                       )}
@@ -403,13 +387,6 @@ function App() {
                   <div className="logo">
                     <img src={CompanyLogo4} alt="" />
                   </div>
-                  </div>
-                  <div className="info">
-                    <h6><ScrambleText text={item.date} /></h6>
-                    <h3><ScrambleText text={item.title} /></h3>
-                    <h6>
-                      <ScrambleText text={item.type} /> <Arrow />
-                    </h6>
                   <div className="logo">
                     <img src={CompanyLogo5} alt="" />
                   </div>
@@ -457,19 +434,26 @@ function App() {
           <div className="box">
             <div className="feed-content">
               <div className="feed-head">
-                <h2>Feed</h2>
+                <h2><ScrambleText text="Feed" /></h2>
               </div>
 
               {normalItems.map((item, index) => (
-                <div className="feed-main-content-item" key={index}>
+                <div
+                  className={`feed-main-content-item ${
+                    index === 0 && "first"
+                  } ${index === 1 && "second"} ${
+                    index === 2 && "third"
+                  }`}
+                  key={index}
+                >
                   <div className="tab">
-                    <h4>{item.type}</h4>
+                    <h4><ScrambleText text={item.type} /></h4>
                   </div>
                   <div className="info">
-                    <h6>{item.date}</h6>
-                    <h3>{item.title}</h3>
+                    <h6><ScrambleText text={item.date} /></h6>
+                    <h3><ScrambleText text={item.title} /></h3>
                     <h6>
-                      {item.type} <Arrow />
+                      <ScrambleText text={item.type} /> <Arrow />
                     </h6>
                   </div>
                 </div>
@@ -482,10 +466,10 @@ function App() {
                 <div className="wrapper">
                   {groupedItems.map((item, index) => (
                     <div className="wrapper-content" key={index}>
-                      <h6>{item.date}</h6>
-                      <h3>{item.title}</h3>
+                      <h6><ScrambleText text={item.date} /></h6>
+                      <h3><ScrambleText text={item.title} /></h3>
                       <h6>
-                        {item.type} <Arrow />
+                       <ScrambleText text={item.type} /> <Arrow />
                       </h6>
                     </div>
                   ))}
@@ -498,17 +482,16 @@ function App() {
               {footerItem && (
                 <div className="feed-main-content-item bottom">
                   <div className="tab">
-                    <h4>SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI</h4>
+                    <h4><ScrambleText text="SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI" /></h4>
                   </div>
                   <div className="info">
-                    <h3>{footerItem.title}</h3>
+                    <h3><ScrambleText text={footerItem.title} /></h3>
                   </div>
                 </div>
               )}
             </div>
           </div>
         </section>
-
       </main>
     </div>
   );
