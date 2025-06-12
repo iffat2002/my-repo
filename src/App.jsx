@@ -145,7 +145,7 @@ const wrapperRef = useRef(null);
   const tableRef = useRef(null);
 
   useEffect(() => {
-    if(window.innerWidth >= 769){
+    if(window.innerWidth >= 750){
     const ctx = gsap.context(() => {
       gsap.to(".manifesto-item", {
         y: "-440px", 
@@ -388,7 +388,7 @@ useEffect(() => {
                       )}
 
                       {/* {item.content && ( */}
-                        <p className={openIndex === index ? "show" : "show"}>
+                        <p className="show">
                           <ScrambleText text={item.content} />
                         </p>
                       {/* )} */}

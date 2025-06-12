@@ -795,12 +795,27 @@ main {
   .wrapper .wrapper-content {
     padding: 1rem 1.5rem;
   }
+  .manifesto-grid {
+        grid-template-columns: 0.15fr 1fr;
+  }
+  .m-right{
+      grid-column: 1 / -1;
+  }
+      .manifesto-grid .m-left img {
+        height: 270px;
+      }
+          .m-center {
+        padding: 3rem 2rem;
+    }
 }
 
 @media only screen and (max-width: 400px) {
   .hero-content .top h1 {
     font-size: 4rem;
   }
+      .manifesto-grid .m-left img {
+        height: 100%;
+    }
   .header-content .right-side .social-icon {
     padding: 1.2rem;
   }
@@ -837,127 +852,21 @@ main {
     grid-template-columns: 1fr;
   }
 }
-
-@media only screen and (max-width: 800px) {
-  .hero-content .top {
-    grid-template-columns: 1fr 1fr;
-  }
-  .hero-content .top h1 {
-    font-size: 6rem;
-    padding: 8rem 5rem 8rem 2rem;
-  }
-  .bottom .h-bottom-text {
-    font-size: 2rem;
-  }
-  .bottom .h-bottom-code {
-    padding: 5rem 2rem;
-  }
-  .manifesto-head h2,
-  .features-head h2,
-  .feed-head h2 {
-    font-size: 3.5rem;
-  }
-  .m-center {
-    padding: 5rem 2rem;
-  }
-  .m-center p,
-  .right-column p {
-    font-size: 1.65rem;
-  }
-  .marquee-section {
-    padding: 0 0 4rem 0;
-  }
-  .feed-main-content-item .info,
-  .wrapper .wrapper-content {
-    flex-direction: column;
-  }
+@media only screen and (max-width: 500px) {
+.manifesto-item{
+  flex-direction: column;
 }
-
-@media only screen and (max-width: 600px) {
-  .hero-content .top {
-    grid-template-columns: 1fr;
-  }
-  .hero-content .top .image img {
-    height: 280px;
-  }
-  .features-main-container .accordion {
-    width: 400px;
-  }
-  .features-main-container {
-    padding-right: 9.1rem;
-  }
-  .features-main-container .accordion .accordion-item h3 {
-    font-size: 1.65rem;
-  }
-  .features-main-container .accordion .accordion-item p.show {
-    padding: 2rem;
-    font-size: 1.55rem;
-  }
-  .feed-head,
-  .manifesto-head {
-    grid-template-columns: 210px 1fr;
-  }
-  .feed-head h2,
-  .manifesto-head h2,
-  .features-head h2 {
-    padding: 2rem 0 2rem 2rem;
-  }
-  .feed-main-content-item {
-    grid-template-columns: 210px 1fr 75px;
-  }
-  .feed-main-content-item .tab {
-    padding: 1rem 1.5rem;
-  }
-  .feed-main-content-item .info,
-  .wrapper .wrapper-content {
-    padding: 1rem 1.5rem;
-  }
 }
-
-@media only screen and (max-width: 400px) {
-  .hero-content .top h1 {
-    font-size: 4rem;
-  }
-  .header-content .right-side .social-icon {
-    padding: 1.2rem;
-  }
-  .bottom .h-bottom-text {
-    font-size: 1.85rem;
-    padding: 2rem;
-  }
-  .bottom .h-bottom-code {
-    padding: 2rem;
-  }
-  .manifesto-head h2,
-  .features-head h2,
-  .feed-head h2 {
-    font-size: 2.5rem;
-  }
-  .features-main-container {
-    padding-right: 6.15rem;
-  }
-  .marquee-tag .logo img {
-    max-width: 92px;
-    height: 24px;
-  }
-  .feed-main-content-item {
-    grid-template-rows: 100px 1fr 75px;
-    grid-template-columns: 1fr;
-  }
-  .feed-main-content-item .info,
-  .wrapper .wrapper-content {
-    border-top: 1px solid var(--gray-1);
-    border-bottom: 1px solid var(--gray-1);
-  }
-  .feed-main-content-item.bottom {
-    grid-template-rows: 127px 1fr 75px;
-    grid-template-columns: 1fr;
-  }
-}
-
 
 @media only screen and (max-width: 768px) {
 .manifesto-table{
   height: auto;
+}
+.manifesto-item{
+          padding: 2.5rem 2rem;
+}
+.pin-spacer{
+      height: 1700px !important;
+      padding: 0 !important;
 }
 }
