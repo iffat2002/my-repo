@@ -135,84 +135,103 @@ function App() {
 
   const [openIndex, setOpenIndex] = useState(0);
 
-
   const groupedItems = feedData.filter((item) => item.group);
   const normalItems = feedData.filter((item) => !item.group && !item.footer);
   const footerItem = feedData.find((item) => item.footer);
 
   //manifesto animation
-const wrapperRef = useRef(null);
+  const wrapperRef = useRef(null);
   const tableRef = useRef(null);
 
   useEffect(() => {
-    if(window.innerWidth >= 750){
-    const ctx = gsap.context(() => {
-      gsap.to(".manifesto-item", {
-        y: "-440px", 
-        delay:0.4,
-        ease: "none",
-        scrollTrigger: {
-          trigger: wrapperRef.current,
-          start: "top top",
-          // end: () => `+=400px`,
-          pin: true,
-          scrub: true,
-        },
-      });
-    }, wrapperRef);
+    if (window.innerWidth >= 750) {
+      const ctx = gsap.context(() => {
+        gsap.to(".manifesto-item", {
+          y: "-440px",
+          delay: 0.4,
+          ease: "none",
+          scrollTrigger: {
+            trigger: wrapperRef.current,
+            start: "top top",
+            // end: () => `+=400px`,
+            pin: true,
+            scrub: true,
+          },
+        });
+      }, wrapperRef);
 
-    return () => ctx.revert();
-  }
+      return () => ctx.revert();
+    }
   }, []);
-
 
   const cardRefs = useRef([]);
 
-const prevIndex = useRef(null);
-const toggleItem = (index) => {
-  setOpenIndex((prev) => (prev === index ? null : index));
-};
 
-useEffect(() => {
-  // Animate closing the previous one
-  if (prevIndex.current !== null && prevIndex.current !== openIndex) {
-    const prevEl = cardRefs.current[prevIndex.current]?.querySelector(".show");
-    if (prevEl) {
-      gsap.to(prevEl, {
+
+  const headersRef = useRef([]);
+
+const accordionBodyRef =useRef();
+
+  const boxRef = useRef(null);
+    const toggleItem = (index) => {
+    setOpenIndex((prev) => (prev === index ? null : index));
+  };
+
+  console.log(openIndex, "openIndex")
+
+  useEffect(() => {
+  const box = boxRef.current;
+  const headers = headersRef.current;
+  const body = accordionBodyRef.current;
+
+  headers.forEach((el) => {
+    if (el) gsap.set(el, { y: 0 });
+  });
+
+  if (openIndex === null || !headers[openIndex]) {
+    gsap.to(box, { opacity: 0, duration: 0.3 });
+    return;
+  }
+
+  const currentHeader = headers[openIndex];
   
-        opacity: 0,
-        maxHeight: 0,
-        padding: "0rem",
-        duration: 0,
-        ease: "power2.in",
-      });
-    }
-  }
+  const top = currentHeader.offsetTop + currentHeader.offsetHeight;
 
-  // Animate opening the current one
-  if (openIndex !== null) {
-    const currentEl = cardRefs.current[openIndex]?.querySelector(".show");
-    if (currentEl) {
-      gsap.fromTo(
-        currentEl,
-        { y: -100, opacity: 0, maxHeight: 0, padding: "0rem" },
-        {
-          y: 0,
-          opacity: 1,
-          maxHeight: 1000,
-          padding: "3rem 3rem 3rem 2rem",
-          duration: 0.8,
-          
-          ease: "power2.out",
-        }
-      );
-    }
-  }
+  const otherHeadersBelow = headers.filter((el, i) => {
+    if (!el || i === openIndex) return false;
+    return el.offsetTop >  currentHeader.offsetTop;
+  });
 
-  prevIndex.current = openIndex;
+  const boxHeight = box.scrollHeight || 100;
+  const shiftAmount = boxHeight;
+
+  gsap.to(box, {
+    top,
+    opacity: 1,
+    duration: 0.6,
+
+    ease: "power2.out",
+  });
+
+  otherHeadersBelow.forEach((el) => {
+    gsap.to(el, {
+      y: shiftAmount,
+      duration: 0.6,
+      ease: "power2.out",
+    });
+  });
+
+  const lastHeader = otherHeadersBelow[otherHeadersBelow.length - 1] || currentHeader;
+  const lastY = lastHeader.offsetTop + lastHeader.offsetHeight;
+  const estimatedBottom = lastY + (otherHeadersBelow.length > 0 ? shiftAmount : 0);
+
+  gsap.to(body, {
+    height: estimatedBottom ,
+    duration: 0,
+  });
 }, [openIndex]);
-  
 
+  
   return (
     <div className="sertn-ai">
       <main>
@@ -284,25 +303,25 @@ useEffect(() => {
                   <ScrambleText text="Manifesto" />
                 </h2>
               </div>
-                <div className="sticky-wrapper" ref={wrapperRef}>
-              <div className="manifesto-grid">
-                <div className="m-left">
-                  <img src={ManifestoLeft} alt="" />
-                </div>
+              <div className="sticky-wrapper" ref={wrapperRef}>
+                <div className="manifesto-grid">
+                  <div className="m-left">
+                    <img src={ManifestoLeft} alt="" />
+                  </div>
 
-                <div className="m-center">
-                  <p>
-                    <ScrambleText text="We believe in a future were AI is sovereign by default and governed by cryptographic certainty over centralized authorities." />
-                  </p>
-                  <p>
-                    <ScrambleText text="Where new economies are decentralized by design and computation integrity is native to protocols." />
-                  </p>
+                  <div className="m-center">
+                    <p>
+                      <ScrambleText text="We believe in a future were AI is sovereign by default and governed by cryptographic certainty over centralized authorities." />
+                    </p>
+                    <p>
+                      <ScrambleText text="Where new economies are decentralized by design and computation integrity is native to protocols." />
+                    </p>
+                  </div>
+                  <div className="m-right">
+                    <img src={ManifestoRight} alt="" />
+                  </div>
                 </div>
-                <div className="m-right">
-                  <img src={ManifestoRight} alt="" />
-                </div>
-              </div>
-            {/* applying inner scroll on this */}
+                {/* applying inner scroll on this */}
                 <div ref={tableRef} className="manifesto-table">
                   {manifesto.map((item) => (
                     <div key={item.id} className="manifesto-item">
@@ -370,30 +389,51 @@ useEffect(() => {
               </div>
 
               <div className="features-main-container">
-                <div className="accordion">
+                <div className="accordion"  ref={accordionBodyRef}>
                   {accordionData.map((item, index) => (
-                    <div className="accordion-item" key={index}   ref={(el) => (cardRefs.current[index] = el)}>
+                    <div
+                      className={`accordion-item ${item.isLink && "link"}`}
+                      key={index}
+                      ref={(el) => (cardRefs.current[index] = el)}
+                    >
                       {item.isLink ? (
-                        <h3 className="gray">
-                          <ScrambleText text="BUILD WITH US" />
-                          <Arrow />
-                        </h3>
+                        <>
+                          <h3 className="gray"  ref={(el) => (headersRef.current[index] = el)}    >
+                            <ScrambleText text="BUILD WITH US" />
+                            <Arrow />
+                          </h3>
+                        </>
                       ) : (
                         <h3
+                          ref={(el) => (headersRef.current[index] = el)}
                           className={openIndex === index ? "" : "inactive"}
                           onClick={() => toggleItem(index)}
                         >
                           <ScrambleText text={item.title} />
                         </h3>
                       )}
+                      {/* Floating content box */}
 
-                      {/* {item.content && ( */}
-                        <p className="show">
+
+                      {/* <div className="show">
+                        <p >
                           <ScrambleText text={item.content} />
                         </p>
-                      {/* )} */}
+                 </div> */}
                     </div>
                   ))}
+          
+                      <div
+                        className= "content-box" 
+                       ref={boxRef}
+                      >
+                        {/* {openIndex === index && ( */}
+                          <p>
+                            <ScrambleText     key={openIndex}  text={accordionData[openIndex].content} />
+                          </p>
+                        {/* )} */}
+                      </div>
+
                 </div>
               </div>
             </div>
@@ -481,24 +521,30 @@ useEffect(() => {
           <div className="box">
             <div className="feed-content">
               <div className="feed-head">
-                <h2><ScrambleText text="Feed" /></h2>
+                <h2>
+                  <ScrambleText text="Feed" />
+                </h2>
               </div>
 
               {normalItems.map((item, index) => (
                 <div
                   className={`feed-main-content-item ${
                     index === 0 && "first"
-                  } ${index === 1 && "second"} ${
-                    index === 2 && "third"
-                  }`}
+                  } ${index === 1 && "second"} ${index === 2 && "third"}`}
                   key={index}
                 >
                   <div className="tab">
-                    <h4><ScrambleText text={item.type} /></h4>
+                    <h4>
+                      <ScrambleText text={item.type} />
+                    </h4>
                   </div>
                   <div className="info">
-                    <h6><ScrambleText text={item.date} /></h6>
-                    <h3><ScrambleText text={item.title} /></h3>
+                    <h6>
+                      <ScrambleText text={item.date} />
+                    </h6>
+                    <h3>
+                      <ScrambleText text={item.title} />
+                    </h3>
                     <h6>
                       <ScrambleText text={item.type} /> <Arrow />
                     </h6>
@@ -513,10 +559,14 @@ useEffect(() => {
                 <div className="wrapper">
                   {groupedItems.map((item, index) => (
                     <div className="wrapper-content" key={index}>
-                      <h6><ScrambleText text={item.date} /></h6>
-                      <h3><ScrambleText text={item.title} /></h3>
                       <h6>
-                       <ScrambleText text={item.type} /> <Arrow />
+                        <ScrambleText text={item.date} />
+                      </h6>
+                      <h3>
+                        <ScrambleText text={item.title} />
+                      </h3>
+                      <h6>
+                        <ScrambleText text={item.type} /> <Arrow />
                       </h6>
                     </div>
                   ))}
@@ -529,10 +579,14 @@ useEffect(() => {
               {footerItem && (
                 <div className="feed-main-content-item bottom">
                   <div className="tab">
-                    <h4><ScrambleText text="SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI" /></h4>
+                    <h4>
+                      <ScrambleText text="SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI" />
+                    </h4>
                   </div>
                   <div className="info">
-                    <h3><ScrambleText text={footerItem.title} /></h3>
+                    <h3>
+                      <ScrambleText text={footerItem.title} />
+                    </h3>
                   </div>
                 </div>
               )}

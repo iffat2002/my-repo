@@ -425,6 +425,10 @@ main {
   gap: 0.5rem;
   border: 1px solid var(--gray-1);
   border-bottom: none;
+  position: relative;
+    height: auto;
+  transition: height 0.3s ease;
+  overflow: hidden;
 }
 .features-main-container .accordion .accordion-item {
   width: 100%;
@@ -432,6 +436,7 @@ main {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  /* position: relative; */
 }
 .features-main-container .accordion .accordion-item h3 {
   width: 100%;
@@ -464,9 +469,10 @@ main {
   background-color: #f0f0f0;
   cursor: auto;
   transition: background-color 0.2s ease;
+  transform: none !important;
   color: var(--black);
 }
-.features-main-container .accordion .accordion-item p {
+.features-main-container .accordion .accordion-item .content-box p {
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -479,14 +485,32 @@ main {
   line-height: 30px;
   letter-spacing: 0%;
   color: var(--black);
-  max-height: 0;
+  /* max-height: 0; */
   box-sizing: border-box;
   overflow: hidden;
   /* transition: max-height 0.2s ease; */
-  opacity: 0;
+  /* opacity: 0; */
+
 
 }
+.content-box {
+  position: absolute;
+  left: 0;
+  right: 0;
+  opacity: 0;
 
+      padding: 3rem 3rem 3rem 2rem;;
+    font-size: 1.55rem;
+background-color: whitesmoke;
+
+  z-index: 2;
+  height: 290px;
+}
+
+.accordion-item.link{
+  position: absolute;
+  bottom: 0;
+}
 
 .feed {
   width: 100%;
@@ -772,10 +796,7 @@ main {
   .features-main-container .accordion .accordion-item h3 {
     font-size: 1.65rem;
   }
-  .features-main-container .accordion .accordion-item p.show {
-    padding: 2rem;
-    font-size: 1.55rem;
-  }
+
   .feed-head,
   .manifesto-head {
     grid-template-columns: 210px 1fr;
