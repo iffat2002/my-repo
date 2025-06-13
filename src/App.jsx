@@ -452,7 +452,7 @@ const wrapperRef = useRef(null);
                   <div className="info">
                     <h6><ScrambleText text={item.date} /></h6>
                     <h3><ScrambleText text={item.title} /></h3>
-                    <h6>
+                    <h6 className="link">
                       <ScrambleText text={item.type} /> <Arrow />
                     </h6>
                   </div>
@@ -468,7 +468,7 @@ const wrapperRef = useRef(null);
                     <div className="wrapper-content" key={index}>
                       <h6><ScrambleText text={item.date} /></h6>
                       <h3><ScrambleText text={item.title} /></h3>
-                      <h6>
+                      <h6 className="link">
                        <ScrambleText text={item.type} /> <Arrow />
                       </h6>
                     </div>

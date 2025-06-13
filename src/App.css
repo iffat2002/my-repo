@@ -453,6 +453,7 @@ main {
 .features-main-container .accordion .accordion-item h3.inactive:hover,
 .features-main-container .accordion .accordion-item h3.gray:hover {
   background-color: var(--purple);
+  cursor: pointer;
 }
 .features-main-container .accordion .accordion-item h3.inactive {
   background-color: var(--white);
@@ -625,6 +626,11 @@ main {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+}
+
+.feed-main-content-item .info h6.link,
+.wrapper .wrapper-content h6.link {
+  cursor: pointer;
 }
 
 .feed-main-content-item .info h6 svg,
