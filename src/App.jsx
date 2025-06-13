@@ -155,6 +155,7 @@ function App() {
             start: "top top",
             // end: () => `+=400px`,
             pin: true,
+              anticipatePin: 1,
             scrub: true,
           },
         });
