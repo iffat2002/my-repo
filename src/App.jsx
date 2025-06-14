@@ -153,9 +153,10 @@ function App() {
           scrollTrigger: {
             trigger: wrapperRef.current,
             start: "top top",
-            // end: () => `+=400px`,
+            //  end: () => `+=700px`,
             pin: true,
-              anticipatePin: 1,
+            //   anticipatePin: 1,
+            pinSpacing: false,
             scrub: true,
           },
         });
@@ -165,74 +166,117 @@ function App() {
     }
   }, []);
 
+  //accordion animation
   const cardRefs = useRef([]);
-
-
-
   const headersRef = useRef([]);
-
-const accordionBodyRef =useRef();
+  const accordionBodyRef = useRef();
 
   const boxRef = useRef(null);
-    const toggleItem = (index) => {
+  const toggleItem = (index) => {
     setOpenIndex((prev) => (prev === index ? null : index));
   };
 
-  console.log(openIndex, "openIndex")
-
   useEffect(() => {
-  const box = boxRef.current;
-  const headers = headersRef.current;
-  const body = accordionBodyRef.current;
+    const box = boxRef.current;
+    const headers = headersRef.current;
+    const body = accordionBodyRef.current;
 
-  headers.forEach((el) => {
-    if (el) gsap.set(el, { y: 0 });
-  });
+    headers.forEach((el) => {
+      if (el) gsap.set(el, { y: 0 });
+    });
 
-  if (openIndex === null || !headers[openIndex]) {
-    gsap.to(box, { opacity: 0, duration: 0.3 });
-    return;
-  }
+    if (openIndex === null || !headers[openIndex]) {
+      gsap.to(box, { opacity: 0, duration: 0.3 });
+      return;
+    }
 
-  const currentHeader = headers[openIndex];
-  
-  const top = currentHeader.offsetTop + currentHeader.offsetHeight;
+    const currentHeader = headers[openIndex];
 
-  const otherHeadersBelow = headers.filter((el, i) => {
-    if (!el || i === openIndex) return false;
-    return el.offsetTop >  currentHeader.offsetTop;
-  });
+    const top = currentHeader.offsetTop + currentHeader.offsetHeight;
 
-  const boxHeight = box.scrollHeight || 100;
-  const shiftAmount = boxHeight;
+    const otherHeadersBelow = headers.filter((el, i) => {
+      if (!el || i === openIndex) return false;
+      return el.offsetTop > currentHeader.offsetTop;
+    });
 
-  gsap.to(box, {
-    top,
-    opacity: 1,
-    duration: 0.6,
+    const boxHeight = box.scrollHeight || 100;
+    const shiftAmount = boxHeight;
 
-    ease: "power2.out",
-  });
-
-  otherHeadersBelow.forEach((el) => {
-    gsap.to(el, {
-      y: shiftAmount,
+    gsap.to(box, {
+      top,
+      opacity: 1,
       duration: 0.6,
+
       ease: "power2.out",
     });
-  });
 
-  const lastHeader = otherHeadersBelow[otherHeadersBelow.length - 1] || currentHeader;
-  const lastY = lastHeader.offsetTop + lastHeader.offsetHeight;
-  const estimatedBottom = lastY + (otherHeadersBelow.length > 0 ? shiftAmount : 0);
+    otherHeadersBelow.forEach((el) => {
+      gsap.to(el, {
+        y: shiftAmount,
+        duration: 0.6,
+        ease: "power2.out",
+      });
+    });
 
-  gsap.to(body, {
-    height: estimatedBottom ,
-    duration: 0,
-  });
-}, [openIndex]);
+    const lastHeader =
+      otherHeadersBelow[otherHeadersBelow.length - 1] || currentHeader;
+    const lastY = lastHeader.offsetTop + lastHeader.offsetHeight;
+    const estimatedBottom =
+      lastY + (otherHeadersBelow.length > 0 ? shiftAmount : 0);
 
+    gsap.to(body, {
+      height: estimatedBottom,
+      duration: 0,
+    });
+  }, [openIndex]);
+
+  //images animation
+  useEffect(() => {
+    //move to right
+    const cardsLeft = gsap.utils.toArray(".bottom .image img, .m-left img, .tab img ");
+    cardsLeft.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        { scaleX: 0,  },
+        {
+          scaleX: 1,
+          duration: 1,
+          delay: 0.6,
+          ease: "power2.inOut",
+           transformOrigin:"left",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
+
+     //move to left
+    const cardsRight = gsap.utils.toArray(".top .image img, .m-right img, .feed-right img ");
+    cardsRight.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        { scaleX: 0,  },
+        {
+          scaleX: 1,
+          duration: 1,
+          delay: 0.6,
+          ease: "power2.inOut",
+           transformOrigin:"right",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
+
+  }, [])
   
+
   return (
     <div className="sertn-ai">
       <main>
@@ -390,7 +434,7 @@ const accordionBodyRef =useRef();
               </div>
 
               <div className="features-main-container">
-                <div className="accordion"  ref={accordionBodyRef}>
+                <div className="accordion" ref={accordionBodyRef}>
                   {accordionData.map((item, index) => (
                     <div
                       className={`accordion-item ${item.isLink && "link"}`}
@@ -399,7 +443,10 @@ const accordionBodyRef =useRef();
                     >
                       {item.isLink ? (
                         <>
-                          <h3 className="gray"  ref={(el) => (headersRef.current[index] = el)}    >
+                          <h3
+                            className="gray"
+                            ref={(el) => (headersRef.current[index] = el)}
+                          >
                             <ScrambleText text="BUILD WITH US" />
                             <Arrow />
                           </h3>
@@ -415,7 +462,6 @@ const accordionBodyRef =useRef();
                       )}
                       {/* Floating content box */}
 
-
                       {/* <div className="show">
                         <p >
                           <ScrambleText text={item.content} />
@@ -423,18 +469,17 @@ const accordionBodyRef =useRef();
                  </div> */}
                     </div>
                   ))}
-          
-                      <div
-                        className= "content-box" 
-                       ref={boxRef}
-                      >
-                        {/* {openIndex === index && ( */}
-                          <p>
-                            <ScrambleText     key={openIndex}  text={accordionData[openIndex].content} />
-                          </p>
-                        {/* )} */}
-                      </div>
 
+                  <div className="content-box" ref={boxRef}>
+                    {/* {openIndex === index && ( */}
+                    <p>
+                      <ScrambleText
+                        key={openIndex}
+                        text={accordionData[openIndex].content}
+                      />
+                    </p>
+                    {/* )} */}
+                  </div>
                 </div>
               </div>
             </div>
