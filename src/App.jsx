@@ -241,7 +241,7 @@ function App() {
         {
           scaleX: 1,
           duration: 1,
-          delay: 0.6,
+          delay: 1.3,
           ease: "power2.inOut",
            transformOrigin:"left",
           scrollTrigger: {
@@ -262,7 +262,7 @@ function App() {
         {
           scaleX: 1,
           duration: 1,
-          delay: 0.6,
+          delay: 1.3,
           ease: "power2.inOut",
            transformOrigin:"right",
           scrollTrigger: {
@@ -274,8 +274,27 @@ function App() {
       );
     });
 
+
+    //hero text animation
+     gsap.fromTo(
+        ".hero h1, .hero h3",
+        { y: 50, opacity:0  },
+        {
+        y:0, opacity:1,
+          duration: 0.6,
+          delay: 0.6,
+          ease: "power2.inOut",
+stagger:0.3,
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "top 100%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+
   }, [])
-  
+
 
   return (
     <div className="sertn-ai">
@@ -287,9 +306,9 @@ function App() {
               <div className="top">
                 <h1>
                   <ScrambleText text="AI hyperscale on" />
-                  {/* <br /> */}
+          
                   <ScrambleText text="decentralized" />
-                  {/* <br /> */}
+              
                   <ScrambleText text="networks" />
                 </h1>
                 <div className="image">
