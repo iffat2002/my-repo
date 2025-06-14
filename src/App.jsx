@@ -232,6 +232,7 @@ function App() {
 
   //images animation
   useEffect(() => {
+    const isMobile = window.innerWidth <= 500;
     //move to right
     const cardsLeft = gsap.utils.toArray(".bottom .image img, .m-left img, .tab img ");
     cardsLeft.forEach((card, index) => {
@@ -241,12 +242,12 @@ function App() {
         {
           scaleX: 1,
           duration: 1,
-          delay: 1.3,
+          delay: isMobile ? 0.8 : 1.3,
           ease: "power2.inOut",
            transformOrigin:"left",
           scrollTrigger: {
             trigger: card,
-            start: "top 80%",
+            start: isMobile ? "top 90%" : "top 80%",
             toggleActions: "play none none none",
           },
         }
@@ -262,12 +263,12 @@ function App() {
         {
           scaleX: 1,
           duration: 1,
-          delay: 1.3,
+          delay: isMobile ? 1 : 1.3,
           ease: "power2.inOut",
            transformOrigin:"right",
           scrollTrigger: {
             trigger: card,
-            start: "top 80%",
+            start: isMobile ? "top 90%" :"top 80%" ,
             toggleActions: "play none none none",
           },
         }
