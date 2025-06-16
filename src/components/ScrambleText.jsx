@@ -73,7 +73,7 @@ useEffect(() => {
 
   if (container) {
     let start= "90%"
-        if (container?.closest(".feed-main-content-item")){
+        if (container?.closest(".feed-footer")){
           start="100%"
         }
       gsap.fromTo(
