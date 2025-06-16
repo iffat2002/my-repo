@@ -1,7 +1,8 @@
 import  { useEffect, useRef } from 'react';
-import "../styles/components/scrambleText.css"
-
-
+import "../styles/components/scrambleText.css";
+import gsap from 'gsap';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
 const ScrambleText = ({ text }) => {
   const containerRef = useRef(null);
   const scrambleChars = "█▓▒░!<>-_\\/[]{}—=+*^?#";
@@ -13,7 +14,7 @@ useEffect(() => {
   container.dataset.scrambled = 'true';
   container.innerHTML = '';
 
-  const words = text.split(' '); // split by words
+  const words = text.split(' '); 
 
   words.forEach((word, wordIndex) => {
     const wordSpan = document.createElement('span');
@@ -66,7 +67,27 @@ useEffect(() => {
       container.appendChild(document.createTextNode(' ')); // normal space
     }
   });
+
+    if (container) {
+      gsap.fromTo(
+        container,
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: container,
+            start: "top 90%", 
+            
+          },
+        }
+      );
+    }
+
 }, [text]);
+
 
 
 

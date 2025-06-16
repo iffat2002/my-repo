@@ -3,6 +3,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(251, 251, 251, 0.5);
+  z-index: 99;
+  backdrop-filter: blur(4px);
 }
 
 .header-content {
@@ -31,12 +37,18 @@
 
 .header-content .logo {
   border-right: 1px solid var(--gray-1);
-  padding: 2rem 3rem;
+  padding: 0.5rem 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
   transition: background-color 0.2s ease;
+}
+
+.header-content .logo img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
 }
 
 .header-content a {

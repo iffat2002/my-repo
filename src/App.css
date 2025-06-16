@@ -1,6 +1,6 @@
 .sertn-ai {
   width: 100%;
-  overflow-x: hidden;
+
   background: transparent;
   white-space: normal;
   background: transparent;
@@ -122,6 +122,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-top: 4.2rem;
 }
 
 .hero-content .top {
@@ -425,6 +426,10 @@ main {
   gap: 0.5rem;
   border: 1px solid var(--gray-1);
   border-bottom: none;
+  position: relative;
+  height: auto;
+  transition: height 0.3s ease;
+  overflow: hidden;
 }
 .features-main-container .accordion .accordion-item {
   width: 100%;
@@ -432,6 +437,7 @@ main {
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  /* position: relative; */
 }
 .features-main-container .accordion .accordion-item h3 {
   width: 100%;
@@ -448,7 +454,6 @@ main {
   justify-content: flex-start;
   gap: 0.5rem;
   cursor: pointer;
-  transition: background-color 0.4 ease-in;
 }
 .features-main-container .accordion .accordion-item h3.inactive:hover,
 .features-main-container .accordion .accordion-item h3.gray:hover {
@@ -465,9 +470,10 @@ main {
   background-color: #f0f0f0;
   cursor: auto;
   transition: background-color 0.2s ease;
+  transform: none !important;
   color: var(--black);
 }
-.features-main-container .accordion .accordion-item p {
+.features-main-container .accordion .accordion-item .content-box p {
   width: 100%;
   display: flex;
   align-items: flex-start;
@@ -480,16 +486,29 @@ main {
   line-height: 30px;
   letter-spacing: 0%;
   color: var(--black);
-  max-height: 0;
+  /* max-height: 0; */
   box-sizing: border-box;
   overflow: hidden;
-  transition: max-height 0.4s ease, opacity 0.6s ease;
-  opacity: 0;
+  /* transition: max-height 0.2s ease; */
+  /* opacity: 0; */
 }
-.features-main-container .accordion .accordion-item p.show {
-  max-height: 1000px;
-  opacity: 1;
+.content-box {
+  position: absolute;
+  left: 0;
+  right: 0;
+  opacity: 0;
+
   padding: 3rem 3rem 3rem 2rem;
+  font-size: 1.55rem;
+  background-color: whitesmoke;
+
+  z-index: 2;
+  height: 290px;
+}
+
+.accordion-item.link {
+  position: absolute;
+  bottom: 0;
 }
 
 .feed {
@@ -673,6 +692,137 @@ main {
   object-fit: fill;
 }
 
+.feed-info-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 427px 1fr 75px;
+  border-top: 1px solid var(--gray-1);
+}
+
+.feed-content .feed-footer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 427px 0.9fr 75px;
+  border-top: 1px solid var(--gray-1);
+}
+
+.feed-info-container .feed-column {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border-right: 1px solid var(--gray-1);
+}
+
+.feed-info-container .feed-column .feed-tab {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  cursor: pointer;
+  padding: 3rem 1.5rem;
+  border-bottom: 1px solid var(--gray-1);
+}
+
+.feed-info-container .feed-column:last-child .feed-tab {
+  border: unset;
+}
+
+.feed-content .feed-footer .feed-tab {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  cursor: pointer;
+  padding: 3rem 1.5rem;
+  border-bottom: 1px solid var(--gray-1);
+  border-right: 1px solid var(--gray-1);
+}
+
+.feed-column .feed-tab h4, .feed-content .feed-footer .feed-tab h4 {
+  font-weight: 400;
+  font-size: 1.65rem;
+  line-height: 30px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.feed-column .feed-tab:hover, .feed-column .feed-info:hover, .feed-footer .feed-tab:hover {
+background-color: var(--purple);
+}
+
+.feed-info-container .feed-column .feed-tab.image {
+  padding: 0;
+}
+
+.feed-info-container .feed-column .feed-tab img {
+  width: 100%;
+  height: 544px;
+  object-fit: fill;
+}
+
+.feed-info-container .feed-column .feed-info, .feed-footer .feed-info {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 3rem 1.5rem;
+  border-bottom: 1px solid var(--gray-1);
+}
+
+.feed-footer .feed-info {
+  border-right: 1px solid var(--gray-1);
+}
+
+.feed-column .feed-info h6 {
+  font-weight: 400;
+  font-size: 1.45rem;
+  line-height: 30px;
+  text-align: right;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.feed-column .feed-info h3, .feed-footer .feed-info h3 {
+  font-weight: 700;
+  font-size: 1.85rem;
+  line-height: 30px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.feed-footer .feed-info h3 {
+  text-align: right;
+}
+
+.feed-tab.active {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.feed-info-container .feed-column .third-column-item {
+  width: 100%;
+  height: 90.8px;
+  border-bottom: 1px solid var(--gray-1);
+}
+
+.feed-column .third-column-item.image {
+  width: 100%;
+  height: unset;
+}
+
+.feed-column .third-column-item.image img {
+  width: 100%;
+  height: 544px;
+  object-fit: fill;
+}
+
+
 @media only screen and (max-width: 1240px) {
   .hero-content .top h1 {
     font-size: 7rem;
@@ -781,10 +931,7 @@ main {
   .features-main-container .accordion .accordion-item h3 {
     font-size: 1.65rem;
   }
-  .features-main-container .accordion .accordion-item p.show {
-    padding: 2rem;
-    font-size: 1.55rem;
-  }
+
   .feed-head,
   .manifesto-head {
     grid-template-columns: 210px 1fr;
@@ -804,11 +951,26 @@ main {
   .wrapper .wrapper-content {
     padding: 1rem 1.5rem;
   }
+  .manifesto-grid {
+    grid-template-columns: 0.15fr 1fr;
+  }
+  .m-right {
+    grid-column: 1 / -1;
+  }
+  .manifesto-grid .m-left img {
+    height: 270px;
+  }
+  .m-center {
+    padding: 3rem 2rem;
+  }
 }
 
 @media only screen and (max-width: 400px) {
   .hero-content .top h1 {
     font-size: 4rem;
+  }
+  .manifesto-grid .m-left img {
+    height: 100%;
   }
   .header-content .right-side .social-icon {
     padding: 1.2rem;
@@ -844,5 +1006,23 @@ main {
   .feed-main-content-item.bottom {
     grid-template-rows: 127px 1fr 75px;
     grid-template-columns: 1fr;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .manifesto-item {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .manifesto-table {
+    height: auto;
+  }
+  .manifesto-item {
+    padding: 2.5rem 2rem;
+  }
+  .pin-spacer {
+    height: 1700px !important;
+    padding: 0 !important;
   }
 }

@@ -135,36 +135,121 @@ function App() {
 
   const [openIndex, setOpenIndex] = useState(0);
 
-  const toggleItem = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  // const [activeFilter, setActiveFilter] = useState("ALL");
 
-  const groupedItems = feedData.filter((item) => item.group);
-  const normalItems = feedData.filter((item) => !item.group && !item.footer);
-  const footerItem = feedData.find((item) => item.footer);
+  // // Process data
+  // const groupedItems = feedData.filter((item) => item.group);
+  // const normalItems = feedData.filter((item) => !item.group && !item.footer);
+  // const footerItem = feedData.find((item) => item.footer);
+
+  // // Filter functions
+  // const filteredGroupedItems =
+  //   activeFilter === "ALL"
+  //     ? groupedItems
+  //     : groupedItems.filter((item) => item.type.toUpperCase() === activeFilter);
+
+  const [activeTab, setActiveTab] = useState(null); // null = show all
+
+  const tabs = ["MEDIUM", "DEMOS", "COMMUNITY"];
+
+  const filteredFeed = activeTab
+    ? feedData.filter(
+        (item) => item.type && item.type.toUpperCase() === activeTab
+      )
+    : feedData;
 
   //manifesto animation
-const wrapperRef = useRef(null);
+  const wrapperRef = useRef(null);
   const tableRef = useRef(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.to(".manifesto-item", {
-        y: "-440px", 
-        delay:0.4,
-        ease: "none",
-        scrollTrigger: {
-          trigger: wrapperRef.current,
-          start: "top top",
-          // end: () => `+=400px`,
-          pin: true,
-          scrub: true,
-        },
-      });
-    }, wrapperRef);
+    if (window.innerWidth >= 750) {
+      const ctx = gsap.context(() => {
+        gsap.to(".manifesto-item", {
+          y: "-440px",
+          delay: 0.4,
+          ease: "none",
+          scrollTrigger: {
+            trigger: wrapperRef.current,
+            start: "top top",
+            // end: () => `+=400px`,
+            pin: true,
+            anticipatePin: 1,
+            scrub: true,
+          },
+        });
+      }, wrapperRef);
 
-    return () => ctx.revert();
+      return () => ctx.revert();
+    }
   }, []);
+
+  const cardRefs = useRef([]);
+
+  const headersRef = useRef([]);
+
+  const accordionBodyRef = useRef();
+
+  const boxRef = useRef(null);
+  const toggleItem = (index) => {
+    setOpenIndex((prev) => (prev === index ? null : index));
+  };
+
+  console.log(openIndex, "openIndex");
+
+  useEffect(() => {
+    const box = boxRef.current;
+    const headers = headersRef.current;
+    const body = accordionBodyRef.current;
+
+    headers.forEach((el) => {
+      if (el) gsap.set(el, { y: 0 });
+    });
+
+    if (openIndex === null || !headers[openIndex]) {
+      gsap.to(box, { opacity: 0, duration: 0.3 });
+      return;
+    }
+
+    const currentHeader = headers[openIndex];
+
+    const top = currentHeader.offsetTop + currentHeader.offsetHeight;
+
+    const otherHeadersBelow = headers.filter((el, i) => {
+      if (!el || i === openIndex) return false;
+      return el.offsetTop > currentHeader.offsetTop;
+    });
+
+    const boxHeight = box.scrollHeight || 100;
+    const shiftAmount = boxHeight;
+
+    gsap.to(box, {
+      top,
+      opacity: 1,
+      duration: 0.6,
+
+      ease: "power2.out",
+    });
+
+    otherHeadersBelow.forEach((el) => {
+      gsap.to(el, {
+        y: shiftAmount,
+        duration: 0.6,
+        ease: "power2.out",
+      });
+    });
+
+    const lastHeader =
+      otherHeadersBelow[otherHeadersBelow.length - 1] || currentHeader;
+    const lastY = lastHeader.offsetTop + lastHeader.offsetHeight;
+    const estimatedBottom =
+      lastY + (otherHeadersBelow.length > 0 ? shiftAmount : 0);
+
+    gsap.to(body, {
+      height: estimatedBottom,
+      duration: 0,
+    });
+  }, [openIndex]);
 
   return (
     <div className="sertn-ai">
@@ -237,25 +322,25 @@ const wrapperRef = useRef(null);
                   <ScrambleText text="Manifesto" />
                 </h2>
               </div>
-                <div className="sticky-wrapper" ref={wrapperRef}>
-              <div className="manifesto-grid">
-                <div className="m-left">
-                  <img src={ManifestoLeft} alt="" />
-                </div>
+              <div className="sticky-wrapper" ref={wrapperRef}>
+                <div className="manifesto-grid">
+                  <div className="m-left">
+                    <img src={ManifestoLeft} alt="" />
+                  </div>
 
-                <div className="m-center">
-                  <p>
-                    <ScrambleText text="We believe in a future were AI is sovereign by default and governed by cryptographic certainty over centralized authorities." />
-                  </p>
-                  <p>
-                    <ScrambleText text="Where new economies are decentralized by design and computation integrity is native to protocols." />
-                  </p>
+                  <div className="m-center">
+                    <p>
+                      <ScrambleText text="We believe in a future were AI is sovereign by default and governed by cryptographic certainty over centralized authorities." />
+                    </p>
+                    <p>
+                      <ScrambleText text="Where new economies are decentralized by design and computation integrity is native to protocols." />
+                    </p>
+                  </div>
+                  <div className="m-right">
+                    <img src={ManifestoRight} alt="" />
+                  </div>
                 </div>
-                <div className="m-right">
-                  <img src={ManifestoRight} alt="" />
-                </div>
-              </div>
-            {/* applying inner scroll on this */}
+                {/* applying inner scroll on this */}
                 <div ref={tableRef} className="manifesto-table">
                   {manifesto.map((item) => (
                     <div key={item.id} className="manifesto-item">
@@ -311,48 +396,6 @@ const wrapperRef = useRef(null);
           </div>
         </section>
 
-        <section className="features">
-          <div className="box">
-            <div className="features-content">
-              <div className="features-head">
-                <h2>
-                  <ScrambleText text="Features" />
-                </h2>
-                <div className="line"></div>
-                <div className="line"></div>
-              </div>
-
-              <div className="features-main-container">
-                <div className="accordion">
-                  {accordionData.map((item, index) => (
-                    <div className="accordion-item" key={index}>
-                      {item.isLink ? (
-                        <h3 className="gray">
-                          <ScrambleText text="BUILD WITH US" />
-                          <Arrow />
-                        </h3>
-                      ) : (
-                        <h3
-                          className={openIndex === index ? "" : "inactive"}
-                          onClick={() => toggleItem(index)}
-                        >
-                          <ScrambleText text={item.title} />
-                        </h3>
-                      )}
-
-                      {item.content && (
-                        <p className={openIndex === index ? "show" : ""}>
-                          <ScrambleText text={item.content} />
-                        </p>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <section className="marquee-section">
           <div className="box">
             <div className="marquee-tag">
@@ -430,65 +473,151 @@ const wrapperRef = useRef(null);
           </div>
         </section>
 
-        <section className="feed">
+        {/* <section className="feed">
           <div className="box">
             <div className="feed-content">
               <div className="feed-head">
-                <h2><ScrambleText text="Feed" /></h2>
-              </div>
+                <h2>
+                  <ScrambleText text="Feed" />
+                </h2>
+              </div> */}
 
-              {normalItems.map((item, index) => (
+        {/* Normal items - these will act as filter tabs */}
+        {/* {normalItems.map((item, index) => (
                 <div
                   className={`feed-main-content-item ${
                     index === 0 && "first"
-                  } ${index === 1 && "second"} ${
-                    index === 2 && "third"
-                  }`}
+                  } ${index === 1 && "second"} ${index === 2 && "third"}`}
                   key={index}
+                  onClick={() => setActiveFilter(item.type.toUpperCase())} // Make whole item clickable
+                  style={{ cursor: "pointer" }} // Add pointer cursor
                 >
                   <div className="tab">
-                    <h4><ScrambleText text={item.type} /></h4>
+                    <h4>
+                      <ScrambleText text={item.type} />
+                    </h4>
                   </div>
                   <div className="info">
-                    <h6><ScrambleText text={item.date} /></h6>
-                    <h3><ScrambleText text={item.title} /></h3>
+                    <h6>
+                      <ScrambleText text={item.date} />
+                    </h6>
+                    <h3>
+                      <ScrambleText text={item.title} />
+                    </h3>
                     <h6 className="link">
                       <ScrambleText text={item.type} /> <Arrow />
                     </h6>
                   </div>
                 </div>
-              ))}
+              ))} */}
 
-              <div className="feed-main-content-item">
-                <div className="tab image">
-                  <img src={FeedLeft} alt="" />
+        {/* Grouped items - filtered content */}
+        {/* {filteredGroupedItems.length > 0 && (
+                <div className="feed-main-content-item">
+                  <div className="tab image">
+                    <img src={FeedLeft} alt="" />
+                  </div>
+                  <div className="wrapper">
+                    {filteredGroupedItems.map((item, index) => (
+                      <div className="wrapper-content" key={index}>
+                        <h6>
+                          <ScrambleText text={item.date} />
+                        </h6>
+                        <h3>
+                          <ScrambleText text={item.title} />
+                        </h3>
+                        <h6 className="link">
+                          <ScrambleText text={item.type} /> <Arrow />
+                        </h6>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="feed-right">
+                    <img src={FeedRight} alt="" />
+                  </div>
                 </div>
-                <div className="wrapper">
-                  {groupedItems.map((item, index) => (
-                    <div className="wrapper-content" key={index}>
-                      <h6><ScrambleText text={item.date} /></h6>
+              )} */}
+
+        {/* Footer */}
+        {/* {(activeFilter === "ALL" || activeFilter === "SERTN") &&
+                footerItem && (
+                  <div className="feed-main-content-item bottom">
+                    <div className="tab">
+                      <h4>
+                        <ScrambleText text="SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI" />
+                      </h4>
+                    </div>
+                    <div className="info">
+                      <h3>
+                        <ScrambleText text={footerItem.title} />
+                      </h3>
+                    </div>
+                  </div>
+                )} */}
+        {/* </div>
+          </div>
+        </section> */}
+        <section className="feed">
+          <div className="box">
+            <div className="feed-content">
+              <div className="feed-head">
+                <h2>
+                  <ScrambleText text="Feed" />
+                </h2>
+              </div>
+              <div className="feed-info-container">
+                <div className="feed-column">
+                  {tabs.map((tab) => (
+                    <div
+                      key={tab}
+                      className={`feed-tab ${
+                        activeTab === tab ? "active" : ""
+                      }`}
+                      onClick={() => setActiveTab(tab)}
+                    >
+                      <h4><ScrambleText text={tab} /></h4>
+                    </div>
+                  ))}
+
+                  <div className="feed-tab image">
+                    <img src={FeedLeft} alt="Feed Left" />
+                  </div>
+                </div>
+
+                <div className="feed-column">
+                  {filteredFeed.map((item, index) => (
+                    <div className="feed-info" key={index}>
+                      {item.date && <h6> <ScrambleText text={item.date} /></h6>}
                       <h3><ScrambleText text={item.title} /></h3>
-                      <h6 className="link">
-                       <ScrambleText text={item.type} /> <Arrow />
-                      </h6>
+                      {item.type && (
+                        <h6>
+                          <ScrambleText text={item.type.toUpperCase()} /> <Arrow />
+                        </h6>
+                      )}
                     </div>
                   ))}
                 </div>
-                <div className="feed-right">
-                  <img src={FeedRight} alt="" />
+                <div className="feed-column">
+                  <div className="third-column-item"></div>
+                  <div className="third-column-item"></div>
+                  <div className="third-column-item"></div>
+                  <div className="third-column-item image">
+                    <img src={FeedRight} alt="" />
+                  </div>
                 </div>
               </div>
-
-              {footerItem && (
-                <div className="feed-main-content-item bottom">
-                  <div className="tab">
-                    <h4><ScrambleText text="SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI" /></h4>
-                  </div>
-                  <div className="info">
-                    <h3><ScrambleText text={footerItem.title} /></h3>
-                  </div>
+              <div className="feed-footer">
+                <div className="feed-tab">
+                  <h4>
+                    <ScrambleText text="SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI" />
+                  </h4>
                 </div>
-              )}
+                <div className="feed-info">
+                  <h3>
+                    <ScrambleText text="sertn" />{" "}
+                  </h3>
+                </div>
+              </div>
             </div>
           </div>
         </section>
