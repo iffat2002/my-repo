@@ -2,6 +2,9 @@ import Moon from "../assets/svgs/Moon";
 import "../styles/components/header.css";
 import ScrambleText from "./ScrambleText";
 import Logo from "../assets/imgs/logo.png";
+import github from "../assets/imgs/github.png";
+import twitter from "../assets/imgs/twitter.png";
+import code from "../assets/imgs/code.png";
 
 const Header = () => {
   return (
@@ -24,13 +27,13 @@ const Header = () => {
               <Moon />
             </div>
             <div className="social-icon">
-              <Moon />
+              <img src={github} alt="github" width={17} height={17} />
             </div>
             <div className="social-icon">
-              <Moon />
+              <img src={twitter} alt="twitter" width={17} height={17}/>
             </div>
             <div className="social-icon">
-              <Moon />
+              <img src={code} alt="twitter" width={17} height={17}/>
             </div>
           </div>
         </div>

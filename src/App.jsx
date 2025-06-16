@@ -16,6 +16,7 @@ import CompanyLogo2 from "./assets/imgs/CompanyLogo2.png";
 import CompanyLogo3 from "./assets/imgs/CompanyLogo3.png";
 import CompanyLogo4 from "./assets/imgs/CompanyLogo4.png";
 import CompanyLogo5 from "./assets/imgs/CompanyLogo5.png";
+import features from "./assets/imgs/features.png";
 
 import ScrambleText from "./components/ScrambleText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -172,9 +173,10 @@ function App() {
           scrollTrigger: {
             trigger: wrapperRef.current,
             start: "top top",
-            // end: () => `+=400px`,
+            //  end: () => `+=700px`,
             pin: true,
-            anticipatePin: 1,
+            //   anticipatePin: 1,
+            pinSpacing: false,
             scrub: true,
           },
         });
@@ -184,10 +186,9 @@ function App() {
     }
   }, []);
 
+  //accordion animation
   const cardRefs = useRef([]);
-
   const headersRef = useRef([]);
-
   const accordionBodyRef = useRef();
 
   const boxRef = useRef(null);
@@ -251,6 +252,75 @@ function App() {
     });
   }, [openIndex]);
 
+  //images animation
+  useEffect(() => {
+    const isMobile = window.innerWidth <= 500;
+    //move to right
+    const cardsLeft = gsap.utils.toArray(
+      ".bottom .image img, .m-left img, .tab img "
+    );
+    cardsLeft.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          duration: 1,
+          delay: isMobile ? 0.8 : 1.3,
+          ease: "power2.inOut",
+          transformOrigin: "left",
+          scrollTrigger: {
+            trigger: card,
+            start: isMobile ? "top 90%" : "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
+
+    //move to left
+    const cardsRight = gsap.utils.toArray(
+      ".top .image img, .m-right img, .feed-right img "
+    );
+    cardsRight.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          duration: 1,
+          delay: isMobile ? 1 : 1.3,
+          ease: "power2.inOut",
+          transformOrigin: "right",
+          scrollTrigger: {
+            trigger: card,
+            start: isMobile ? "top 90%" : "top 80%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
+
+    //hero text animation
+    gsap.fromTo(
+      ".hero h1, .hero h3",
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        delay: 0.6,
+        ease: "power2.inOut",
+        stagger: 0.3,
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top 100%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+  }, []);
+
   return (
     <div className="sertn-ai">
       <main>
@@ -261,9 +331,9 @@ function App() {
               <div className="top">
                 <h1>
                   <ScrambleText text="AI hyperscale on" />
-                  {/* <br /> */}
+
                   <ScrambleText text="decentralized" />
-                  {/* <br /> */}
+
                   <ScrambleText text="networks" />
                 </h1>
                 <div className="image">
@@ -396,6 +466,71 @@ function App() {
           </div>
         </section>
 
+        <section className="features">
+          <div className="box">
+            <div className="features-content">
+              <div className="features-head">
+                <h2>
+                  <ScrambleText text="Features" />
+                </h2>
+                <div className="line"></div>
+                <div className="line"></div>
+              </div>
+
+              <div className="features-main-container">
+                <img src={features}  alt=""/>
+                <div className="accordion" ref={accordionBodyRef}>
+                  {accordionData.map((item, index) => (
+                    <div
+                      className={`accordion-item ${item.isLink && "link"}`}
+                      key={index}
+                      ref={(el) => (cardRefs.current[index] = el)}
+                    >
+                      {item.isLink ? (
+                        <>
+                          <h3
+                            className="gray"
+                            ref={(el) => (headersRef.current[index] = el)}
+                          >
+                            <ScrambleText text="BUILD WITH US" />
+                            <Arrow />
+                          </h3>
+                        </>
+                      ) : (
+                        <h3
+                          ref={(el) => (headersRef.current[index] = el)}
+                          className={openIndex === index ? "" : "inactive"}
+                          onClick={() => toggleItem(index)}
+                        >
+                          <ScrambleText text={item.title} />
+                        </h3>
+                      )}
+                      {/* Floating content box */}
+
+                      {/* <div className="show">
+                        <p >
+                          <ScrambleText text={item.content} />
+                        </p>
+                 </div> */}
+                    </div>
+                  ))}
+
+                  <div className="content-box" ref={boxRef}>
+                    {/* {openIndex === index && ( */}
+                    <p>
+                      <ScrambleText
+                        key={openIndex}
+                        text={accordionData[openIndex].content}
+                      />
+                    </p>
+                    {/* )} */}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="marquee-section">
           <div className="box">
             <div className="marquee-tag">
@@ -473,90 +608,6 @@ function App() {
           </div>
         </section>
 
-        {/* <section className="feed">
-          <div className="box">
-            <div className="feed-content">
-              <div className="feed-head">
-                <h2>
-                  <ScrambleText text="Feed" />
-                </h2>
-              </div> */}
-
-        {/* Normal items - these will act as filter tabs */}
-        {/* {normalItems.map((item, index) => (
-                <div
-                  className={`feed-main-content-item ${
-                    index === 0 && "first"
-                  } ${index === 1 && "second"} ${index === 2 && "third"}`}
-                  key={index}
-                  onClick={() => setActiveFilter(item.type.toUpperCase())} // Make whole item clickable
-                  style={{ cursor: "pointer" }} // Add pointer cursor
-                >
-                  <div className="tab">
-                    <h4>
-                      <ScrambleText text={item.type} />
-                    </h4>
-                  </div>
-                  <div className="info">
-                    <h6>
-                      <ScrambleText text={item.date} />
-                    </h6>
-                    <h3>
-                      <ScrambleText text={item.title} />
-                    </h3>
-                    <h6 className="link">
-                      <ScrambleText text={item.type} /> <Arrow />
-                    </h6>
-                  </div>
-                </div>
-              ))} */}
-
-        {/* Grouped items - filtered content */}
-        {/* {filteredGroupedItems.length > 0 && (
-                <div className="feed-main-content-item">
-                  <div className="tab image">
-                    <img src={FeedLeft} alt="" />
-                  </div>
-                  <div className="wrapper">
-                    {filteredGroupedItems.map((item, index) => (
-                      <div className="wrapper-content" key={index}>
-                        <h6>
-                          <ScrambleText text={item.date} />
-                        </h6>
-                        <h3>
-                          <ScrambleText text={item.title} />
-                        </h3>
-                        <h6 className="link">
-                          <ScrambleText text={item.type} /> <Arrow />
-                        </h6>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="feed-right">
-                    <img src={FeedRight} alt="" />
-                  </div>
-                </div>
-              )} */}
-
-        {/* Footer */}
-        {/* {(activeFilter === "ALL" || activeFilter === "SERTN") &&
-                footerItem && (
-                  <div className="feed-main-content-item bottom">
-                    <div className="tab">
-                      <h4>
-                        <ScrambleText text="SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI" />
-                      </h4>
-                    </div>
-                    <div className="info">
-                      <h3>
-                        <ScrambleText text={footerItem.title} />
-                      </h3>
-                    </div>
-                  </div>
-                )} */}
-        {/* </div>
-          </div>
-        </section> */}
         <section className="feed">
           <div className="box">
             <div className="feed-content">
@@ -575,7 +626,9 @@ function App() {
                       }`}
                       onClick={() => setActiveTab(tab)}
                     >
-                      <h4><ScrambleText text={tab} /></h4>
+                      <h4>
+                        <ScrambleText text={tab} />
+                      </h4>
                     </div>
                   ))}
 
@@ -587,18 +640,26 @@ function App() {
                 <div className="feed-column">
                   {filteredFeed.map((item, index) => (
                     <div className="feed-info" key={index}>
-                      {item.date && <h6> <ScrambleText text={item.date} /></h6>}
-                      <h3><ScrambleText text={item.title} /></h3>
+                      {item.date && (
+                        <h6>
+                          {" "}
+                          <ScrambleText text={item.date} />
+                        </h6>
+                      )}
+                      <h3>
+                        <ScrambleText text={item.title} />
+                      </h3>
                       {item.type && (
                         <h6>
-                          <ScrambleText text={item.type.toUpperCase()} /> <Arrow />
+                          <ScrambleText text={item.type.toUpperCase()} />{" "}
+                          <Arrow />
                         </h6>
                       )}
                     </div>
                   ))}
                 </div>
                 <div className="feed-column">
-                  <div className="third-column-item"></div>
+                  <div className="third-column-item first"></div>
                   <div className="third-column-item"></div>
                   <div className="third-column-item"></div>
                   <div className="third-column-item image">
