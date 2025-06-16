@@ -650,7 +650,7 @@ function App() {
                         <ScrambleText text={item.title} />
                       </h3>
                       {item.type && (
-                        <h6>
+                        <h6 className="link">
                           <ScrambleText text={item.type.toUpperCase()} />{" "}
                           <Arrow />
                         </h6>
