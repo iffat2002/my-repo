@@ -961,6 +961,9 @@ main {
   .manifesto-content {
     height: 325vh;
   }
+  .sticky-wrapper {
+    height: 162vh;
+  }
 }
 
 @media only screen and (max-width: 600px) {
