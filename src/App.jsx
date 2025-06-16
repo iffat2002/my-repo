@@ -660,8 +660,8 @@ function App() {
                 </div>
                 <div className="feed-column">
                   <div className="third-column-item first"></div>
-                  <div className="third-column-item"></div>
-                  <div className="third-column-item"></div>
+                  <div className="third-column-item second"></div>
+                  <div className="third-column-item third"></div>
                   <div className="third-column-item image">
                     <img src={FeedRight} alt="" />
                   </div>

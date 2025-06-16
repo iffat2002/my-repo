@@ -998,6 +998,21 @@ main {
     border-bottom: 1px solid var(--gray-1);
   }
 
+  .feed-info-container .feed-column .third-column-item.first, .feed-info-container .feed-column .third-column-item.second, .feed-info-container .feed-column .third-column-item.third {
+    display: none;
+  }
+
+  .feed-info-container .feed-column .third-column-item, .feed-info-container .feed-column:first-child .feed-tab {
+    height: unset;
+  }
+  .feed-info-container .feed-column .feed-tab img {
+    height: 200px;
+  }
+
+  .feed-column .third-column-item.image img {
+    height: 100px;
+  }
+
   .manifesto-grid {
     grid-template-columns: 0.15fr 1fr;
   }
