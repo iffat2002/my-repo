@@ -64,11 +64,12 @@ useEffect(() => {
 
     container.appendChild(wordSpan);
     if (wordIndex !== words.length - 1) {
-      container.appendChild(document.createTextNode(' ')); // normal space
+      container.appendChild(document.createTextNode(' ')); 
     }
   }); 
   
     if (container?.closest(".hero")) return;
+     if (container?.closest(".accordion")) return;
 
   if (container) {
     let start= "90%"
