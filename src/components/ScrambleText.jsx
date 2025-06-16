@@ -64,15 +64,16 @@ useEffect(() => {
 
     container.appendChild(wordSpan);
     if (wordIndex !== words.length - 1) {
-      container.appendChild(document.createTextNode(' ')); // normal space
+      container.appendChild(document.createTextNode(' ')); 
     }
   }); 
   
     if (container?.closest(".hero")) return;
+     if (container?.closest(".accordion")) return;
 
   if (container) {
     let start= "90%"
-        if (container?.closest(".feed-main-content-item")){
+        if (container?.closest(".feed-footer")){
           start="100%"
         }
       gsap.fromTo(

@@ -256,9 +256,7 @@ function App() {
   useEffect(() => {
     const isMobile = window.innerWidth <= 500;
     //move to right
-    const cardsLeft = gsap.utils.toArray(
-      ".bottom .image img, .m-left img, .tab img "
-    );
+    const cardsLeft = gsap.utils.toArray(".bottom .image, .m-left, .feed-main-content-item .image");
     cardsLeft.forEach((card, index) => {
       gsap.fromTo(
         card,
@@ -271,17 +269,15 @@ function App() {
           transformOrigin: "left",
           scrollTrigger: {
             trigger: card,
-            start: isMobile ? "top 90%" : "top 80%",
+            start: isMobile ? "top 90%" : "top 90%",
             toggleActions: "play none none none",
           },
         }
       );
     });
 
-    //move to left
-    const cardsRight = gsap.utils.toArray(
-      ".top .image img, .m-right img, .feed-right img "
-    );
+     //move to left
+    const cardsRight = gsap.utils.toArray(".top .image, .m-right, .feed-right");
     cardsRight.forEach((card, index) => {
       gsap.fromTo(
         card,
@@ -294,7 +290,7 @@ function App() {
           transformOrigin: "right",
           scrollTrigger: {
             trigger: card,
-            start: isMobile ? "top 90%" : "top 80%",
+            start: isMobile ? "top 90%" :"top 90%" ,
             toggleActions: "play none none none",
           },
         }
