@@ -49,10 +49,5 @@
     "date": "2024.06.12",
     "title": "Lorem ipsum dolor sit amet, consectetur adipiscing",
     "group": true
-  },
-  {
-    "type": "SERTN",
-    "title": "sertn",
-    "footer": true
   }
 ]
