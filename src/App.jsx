@@ -149,7 +149,7 @@ function App() {
   //     ? groupedItems
   //     : groupedItems.filter((item) => item.type.toUpperCase() === activeFilter);
 
-  const [activeTab, setActiveTab] = useState(null); // null = show all
+  const [activeTab, setActiveTab] = useState("MEDIUM"); // null = show all
 
   const tabs = ["MEDIUM", "DEMOS", "COMMUNITY"];
 
@@ -256,7 +256,9 @@ function App() {
   useEffect(() => {
     const isMobile = window.innerWidth <= 500;
     //move to right
-    const cardsLeft = gsap.utils.toArray(".bottom .image, .m-left, .feed-main-content-item .image");
+    const cardsLeft = gsap.utils.toArray(
+      ".bottom .image, .m-left, .feed-main-content-item .image"
+    );
     cardsLeft.forEach((card, index) => {
       gsap.fromTo(
         card,
@@ -276,7 +278,7 @@ function App() {
       );
     });
 
-     //move to left
+    //move to left
     const cardsRight = gsap.utils.toArray(".top .image, .m-right, .feed-right");
     cardsRight.forEach((card, index) => {
       gsap.fromTo(
@@ -290,7 +292,7 @@ function App() {
           transformOrigin: "right",
           scrollTrigger: {
             trigger: card,
-            start: isMobile ? "top 90%" :"top 90%" ,
+            start: isMobile ? "top 90%" : "top 90%",
             toggleActions: "play none none none",
           },
         }
@@ -474,7 +476,7 @@ function App() {
               </div>
 
               <div className="features-main-container">
-                <img src={features}  alt=""/>
+                <img src={features} alt="" />
                 <div className="accordion" ref={accordionBodyRef}>
                   {accordionData.map((item, index) => (
                     <div
@@ -613,7 +615,7 @@ function App() {
                 </h2>
               </div>
               <div className="feed-info-container">
-                <div className="feed-column">
+                <div className="feed-column tab-container">
                   {tabs.map((tab) => (
                     <div
                       key={tab}
