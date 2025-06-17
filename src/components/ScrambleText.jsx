@@ -1,35 +1,30 @@
-import  { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import "../styles/components/scrambleText.css";
+import SplitType from 'split-type';
+
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
+
+const scrambleChars = "█▓▒░!<>-_\\/[]{}—=+*^?#";
+
 const ScrambleText = ({ text }) => {
   const containerRef = useRef(null);
-  const scrambleChars = "█▓▒░!<>-_\\/[]{}—=+*^?#";
 
-useEffect(() => {
-  const container = containerRef.current;
-  if (!container || container.dataset.scrambled === 'true') return;
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
 
-  container.dataset.scrambled = 'true';
-  container.innerHTML = '';
+    const split = new SplitType(container, { types: 'lines, words, chars' });
 
-  const words = text.split(' ');
+    // Add scramble effect to each char
+    const chars = container.querySelectorAll('.char');
 
-  words.forEach((word, wordIndex) => {
-    const wordSpan = document.createElement('span');
-    wordSpan.classList.add('word');
-
-    [...word].forEach(char => {
-      const span = document.createElement('span');
-      span.textContent = char;
-      span.classList.add('char');
-      wordSpan.appendChild(span);
-
+    chars.forEach((span) => {
+      const originalChar = span.textContent;
       let scrambleInterval;
       let scrambleTimeout;
       let isScrambling = false;
-      const originalChar = char;
 
       const startScramble = () => {
         if (isScrambling) return;
@@ -62,78 +57,53 @@ useEffect(() => {
       });
     });
 
-
-    container.appendChild(wordSpan);
-    if (wordIndex !== words.length - 1) {
-      container.appendChild(document.createTextNode(' '));
-    }
-  });
-
-}, [text]);
-
-useEffect(() => {
-  const allScrambles = gsap.utils.toArray('.scramble-text');
-
-  let heroIndex = 0;
-
-  allScrambles.forEach((el) => {
-    const isInHero = el.closest('.hero-content .top');
-      const isFooter = el.closest('.feed-footer');
-    const indexDelay = isInHero ? heroIndex++ * 0.4 : 0;
-
-    gsap.fromTo(
-      el.querySelectorAll('.word'),
-      {
-        y: "100%",
-        rotate: 8,
-        opacity: 0,
-      },
-      {
-        y: 0,
-        rotate: 0,
-        opacity: 1,
-        duration: 1,
-        ease: "power2.inOut",
-        stagger: isInHero ? 0.15 : 0,
-        delay: indexDelay,
-        scrollTrigger: {
-          trigger: el,
-          start: isFooter ? "top 100%" : "top 90%",
+    // text animation
+    const lines = container.querySelectorAll('.line');
+    lines.forEach(line => {
+      if(line?.closest(".feed-footer")) return;
+   
+  const wrapper = document.createElement('div');
+  wrapper.classList.add('line-wrapper');
+  line.parentNode.insertBefore(wrapper, line);
+  wrapper.appendChild(line);
+     let start =false;
+        if(line?.closest(".hero-content .top")) {
+          start = true
         }
-      }
-    );
-  });
-}, []);
+  gsap.fromTo(
+  lines,
+  {
+    y: '80px',
+    rotate: 4,
+    opacity: 0,
+  },
+  {
+    y: 0,
+    rotate: 0,
+    opacity: 1,
+    duration: 1,
+    ease: 'power2.in',
+    stagger: 0.1,
+    scrollTrigger: {
+      trigger: container,
+      start: start ? "top 100%" : 'top 90%',
+    },
+  }
+);
 
-  //  
-  //    if (container?.closest(".accordion")) return;
+});
 
-  // if (container) {
-  //   let start= "90%"
-  //       if (container?.closest(".feed-footer")){
-  //         start="100%"
-  //       }
-  //     gsap.fromTo(
-  //       container,
-  //       { y: 50, opacity: 0 },
-  //       {
-  //         y: 0,
-  //         opacity: 1,
-  //         duration: 0.6,
-  //         delay:0.1,
-  //         ease: "power2.out",
-  //         scrollTrigger: {
-  //           trigger: container,
-  //           start: `top ${start}`,
 
-  //            toggleActions: "play none play reset",
+   
+    return () => split.revert();
 
-  //         },
-  //       }
-  //     );
-  //   }
+  }, [text]);
 
-  return <div ref={containerRef} className="scramble-text" />;
+  return (
+    <div ref={containerRef} className="scramble-text">
+      {text}
+    </div>
+  );
 };
 
 export default ScrambleText;

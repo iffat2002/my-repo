@@ -134,3 +134,9 @@
     width: 100%;
   }
 }
+
+.line-wrapper {
+  overflow: hidden;
+  display: block;
+
+}
