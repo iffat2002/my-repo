@@ -256,20 +256,20 @@ function App() {
   useEffect(() => {
     const isMobile = window.innerWidth <= 500;
     //move to right
-    const cardsLeft = gsap.utils.toArray(".bottom .image, .m-left, .feed-main-content-item .image, .features-img");
+    const cardsLeft = gsap.utils.toArray(".bottom .image, .m-left, .col-img");
     cardsLeft.forEach((card, index) => {
       gsap.fromTo(
         card,
-        { scaleX: 0 },
+        { width: 0 },
         {
-          scaleX: 1,
+          width: "100%",
           duration: 1,
-          // delay: isMobile ? 0.8 : 0.5,
+          delay: isMobile ? 0.8 : 0.7,
           ease: "power2.inOut",
           transformOrigin: "left",
           scrollTrigger: {
             trigger: card,
-            start: isMobile ? "top 90%" : "top 90%",
+            start: isMobile ? "top 90%" : "top 95%",
             toggleActions: "play none none none",
           },
         }
@@ -277,13 +277,13 @@ function App() {
     });
 
      //move to left
-    const cardsRight = gsap.utils.toArray(".top .image, .m-right, .feed-right");
+    const cardsRight = gsap.utils.toArray(".top .image, .m-right, .third-column-item.image");
     cardsRight.forEach((card, index) => {
       gsap.fromTo(
         card,
-        { scaleX: 0 },
+        { width: 0 },
         {
-          scaleX: 1,
+          width: "100%",
           duration: 1,
           delay: isMobile ? 1 : 0.5,
           ease: "power2.inOut",
@@ -474,9 +474,7 @@ function App() {
               </div>
 
               <div className="features-main-container">
-            <div className="features-img">
                 <img src={features}  alt=""/>
-                </div>
                 <div className="accordion" ref={accordionBodyRef}>
                   {accordionData.map((item, index) => (
                     <div
@@ -630,7 +628,7 @@ function App() {
                     </div>
                   ))}
 
-                  <div className="feed-tab image">
+                  <div className="feed-tab image col-img">
                     <img src={FeedLeft} alt="Feed Left" />
                   </div>
                 </div>

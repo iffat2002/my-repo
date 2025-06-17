@@ -77,7 +77,7 @@ useEffect(() => {
   let heroIndex = 0;
 
   allScrambles.forEach((el) => {
-    const isInHero = el.closest('.hero');
+    const isInHero = el.closest('.hero-content .top');
       const isFooter = el.closest('.feed-footer');
     const indexDelay = isInHero ? heroIndex++ * 0.4 : 0;
 
@@ -85,7 +85,7 @@ useEffect(() => {
       el.querySelectorAll('.word'),
       {
         y: "100%",
-        rotate: 10,
+        rotate: 8,
         opacity: 0,
       },
       {
@@ -98,7 +98,7 @@ useEffect(() => {
         delay: indexDelay,
         scrollTrigger: {
           trigger: el,
-          start: isFooter ? "top 100%" : "top 85%",
+          start: isFooter ? "top 100%" : "top 90%",
         }
       }
     );

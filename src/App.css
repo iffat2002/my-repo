@@ -200,6 +200,7 @@ main {
   justify-content: center;
 }
 
+
 .hero-content .top .image img,
 .hero-content .bottom .image img {
   width: 100%;
@@ -859,7 +860,9 @@ main {
 .feed-footer .feed-info h3 {
   text-align: right;
 }
-
+.feed-tab{
+  height: auto;
+}
 .feed-tab.active {
   background-color: var(--black);
   color: var(--white);
@@ -1011,6 +1014,7 @@ main {
   }
 }
 
+
 @media only screen and (max-width: 600px) {
   .hero-content .top {
     grid-template-columns: 1fr;
@@ -1120,15 +1124,13 @@ main {
     padding: 2.5rem 2rem;
   }
 
-  /* .pin-spacer{
-      height: 1700px !important;
-      padding: 0 !important;
-} */
-}
-/* .pin-spacer{
-      padding: 0 !important;
-} */
 
-h1{
+}
+
+
+.bottom .image, .m-left, .feed-tab,.top .image, .m-right, .col-img, .third-column-item.image{
   overflow: hidden;
+}
+.bottom .image img, .m-left img, .feed-tab img,.top .image img, .m-right img, .col-img img, .third-column-item.image img{
+height: 100%;
 }
