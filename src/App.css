@@ -1128,3 +1128,7 @@ main {
 /* .pin-spacer{
       padding: 0 !important;
 } */
+
+h1{
+  overflow: hidden;
+}

@@ -1,5 +1,6 @@
 .scramble-text {
   white-space: pre-wrap;
+  overflow: hidden;
 
 }
 
@@ -18,6 +19,7 @@
 .word {
   white-space: nowrap;
   display: inline-block;
+  overflow: hidden;
 }
 
 @keyframes chromatic {

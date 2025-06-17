@@ -14,12 +14,12 @@ useEffect(() => {
   container.dataset.scrambled = 'true';
   container.innerHTML = '';
 
-  const words = text.split(' '); 
+  const words = text.split(' ');
 
   words.forEach((word, wordIndex) => {
     const wordSpan = document.createElement('span');
     wordSpan.classList.add('word');
-    
+
     [...word].forEach(char => {
       const span = document.createElement('span');
       span.textContent = char;
@@ -62,46 +62,76 @@ useEffect(() => {
       });
     });
 
+
     container.appendChild(wordSpan);
     if (wordIndex !== words.length - 1) {
-      container.appendChild(document.createTextNode(' ')); 
+      container.appendChild(document.createTextNode(' '));
     }
-  }); 
-  
-    if (container?.closest(".hero")) return;
-     if (container?.closest(".accordion")) return;
-
-  if (container) {
-    let start= "90%"
-        if (container?.closest(".feed-footer")){
-          start="100%"
-        }
-      gsap.fromTo(
-        container,
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          delay:0.1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: container,
-            start: `top ${start}`, 
-        
-             toggleActions: "play none play reset", 
-            
-          },
-        }
-      );
-    }
-
-  
+  });
 
 }, [text]);
 
+useEffect(() => {
+  const allScrambles = gsap.utils.toArray('.scramble-text');
 
+  let heroIndex = 0;
 
+  allScrambles.forEach((el) => {
+    const isInHero = el.closest('.hero');
+      const isFooter = el.closest('.feed-footer');
+    const indexDelay = isInHero ? heroIndex++ * 0.4 : 0;
+
+    gsap.fromTo(
+      el.querySelectorAll('.word'),
+      {
+        y: "100%",
+        rotate: 10,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        rotate: 0,
+        opacity: 1,
+        duration: 1,
+        ease: "power2.inOut",
+        stagger: isInHero ? 0.15 : 0,
+        delay: indexDelay,
+        scrollTrigger: {
+          trigger: el,
+          start: isFooter ? "top 100%" : "top 85%",
+        }
+      }
+    );
+  });
+}, []);
+
+  //  
+  //    if (container?.closest(".accordion")) return;
+
+  // if (container) {
+  //   let start= "90%"
+  //       if (container?.closest(".feed-footer")){
+  //         start="100%"
+  //       }
+  //     gsap.fromTo(
+  //       container,
+  //       { y: 50, opacity: 0 },
+  //       {
+  //         y: 0,
+  //         opacity: 1,
+  //         duration: 0.6,
+  //         delay:0.1,
+  //         ease: "power2.out",
+  //         scrollTrigger: {
+  //           trigger: container,
+  //           start: `top ${start}`,
+
+  //            toggleActions: "play none play reset",
+
+  //         },
+  //       }
+  //     );
+  //   }
 
   return <div ref={containerRef} className="scramble-text" />;
 };

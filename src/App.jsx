@@ -256,7 +256,7 @@ function App() {
   useEffect(() => {
     const isMobile = window.innerWidth <= 500;
     //move to right
-    const cardsLeft = gsap.utils.toArray(".bottom .image, .m-left, .feed-main-content-item .image");
+    const cardsLeft = gsap.utils.toArray(".bottom .image, .m-left, .feed-main-content-item .image, .features-img");
     cardsLeft.forEach((card, index) => {
       gsap.fromTo(
         card,
@@ -264,7 +264,7 @@ function App() {
         {
           scaleX: 1,
           duration: 1,
-          delay: isMobile ? 0.8 : 1.3,
+          // delay: isMobile ? 0.8 : 0.5,
           ease: "power2.inOut",
           transformOrigin: "left",
           scrollTrigger: {
@@ -285,7 +285,7 @@ function App() {
         {
           scaleX: 1,
           duration: 1,
-          delay: isMobile ? 1 : 1.3,
+          delay: isMobile ? 1 : 0.5,
           ease: "power2.inOut",
           transformOrigin: "right",
           scrollTrigger: {
@@ -298,23 +298,23 @@ function App() {
     });
 
     //hero text animation
-    gsap.fromTo(
-      ".hero h1, .hero h3",
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        delay: 0.6,
-        ease: "power2.inOut",
-        stagger: 0.3,
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "top 100%",
-          toggleActions: "play none none none",
-        },
-      }
-    );
+    // gsap.fromTo(
+    //   ".hero h1, .hero h3",
+    //   { y: 50, opacity: 0 },
+    //   {
+    //     y: 0,
+    //     opacity: 1,
+    //     duration: 0.6,
+    //     delay: 0.6,
+    //     ease: "power2.inOut",
+    //     stagger: 0.3,
+    //     scrollTrigger: {
+    //       trigger: ".hero",
+    //       start: "top 100%",
+    //       toggleActions: "play none none none",
+    //     },
+    //   }
+    // );
   }, []);
 
   return (
@@ -474,7 +474,9 @@ function App() {
               </div>
 
               <div className="features-main-container">
+            <div className="features-img">
                 <img src={features}  alt=""/>
+                </div>
                 <div className="accordion" ref={accordionBodyRef}>
                   {accordionData.map((item, index) => (
                     <div
