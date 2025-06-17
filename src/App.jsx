@@ -150,7 +150,7 @@ function App() {
   //     ? groupedItems
   //     : groupedItems.filter((item) => item.type.toUpperCase() === activeFilter);
 
-  const [activeTab, setActiveTab] = useState(null); // null = show all
+  const [activeTab, setActiveTab] = useState("MEDIUM"); // null = show all
 
   const tabs = ["MEDIUM", "DEMOS", "COMMUNITY"];
 
@@ -513,12 +513,12 @@ useEffect(() => {
                 <h2>
                   <ScrambleText text="Features" />
                 </h2>
-                <div className="line"></div>
-                <div className="line"></div>
+                <div className="line-border"></div>
+                <div className="line-border"></div>
               </div>
 
               <div className="features-main-container">
-                <img src={features}  alt=""/>
+                <img src={features} alt="" />
                 <div className="accordion" ref={accordionBodyRef}>
                   {accordionData.map((item, index) => (
                     <div
@@ -657,7 +657,7 @@ useEffect(() => {
                 </h2>
               </div>
               <div className="feed-info-container">
-                <div className="feed-column">
+                <div className="feed-column tab-container">
                   {tabs.map((tab) => (
                     <div
                       key={tab}
@@ -690,7 +690,7 @@ useEffect(() => {
                         <ScrambleText text={item.title} />
                       </h3>
                       {item.type && (
-                        <h6>
+                        <h6 className="link">
                           <ScrambleText text={item.type.toUpperCase()} />{" "}
                           <Arrow />
                         </h6>

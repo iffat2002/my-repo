@@ -81,12 +81,12 @@ const ScrambleText = ({ text }) => {
     y: 0,
     rotate: 0,
     opacity: 1,
-    duration: 1,
+    duration: 0.8,
     ease: 'power2.in',
     stagger: 0.1,
     scrollTrigger: {
       trigger: container,
-      start: start ? "top 100%" : 'top 90%',
+      start: start ? "top 98%" : 'top 90%',
     },
   }
 );

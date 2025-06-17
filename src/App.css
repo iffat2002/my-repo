@@ -435,7 +435,7 @@ main {
 }
 .features-head {
   width: 100%;
-  /* border: 1px solid var(--gray-1); */
+  border-bottom: 1px solid var(--gray-1);
   border-right: 0;
   display: grid;
   grid-template-columns: 1fr 0.1fr 0.08fr;
@@ -450,7 +450,7 @@ main {
   vertical-align: middle;
   color: #1e1e1e;
 }
-.features-head .line {
+.features-head .line-border {
   width: 100%;
   border-right: 1px solid var(--gray-1);
 }
@@ -459,14 +459,12 @@ main {
   display: flex;
   align-items: flex-start;
   justify-content: flex-end;
-  padding-right: 19.5rem;
-  border-top: 1px solid var(--gray-1);
   position: relative;
   overflow: hidden;
 }
 .features-main-container img {
   position: absolute;
-  height: auto;
+  height: 100%;
   width: 100%;
   object-fit: cover;
 }
@@ -483,6 +481,7 @@ main {
   height: auto;
   transition: height 0.3s ease;
   overflow: hidden;
+  margin-right: 19.5rem;
 }
 .features-main-container .accordion .accordion-item {
   width: 100%;
@@ -760,7 +759,6 @@ main {
   width: 100%;
   display: grid;
   grid-template-columns: 427px 0.9fr 75px;
-  border-top: 1px solid var(--gray-1);
 }
 
 .feed-info-container .feed-column {
@@ -814,11 +812,12 @@ main {
 
 .feed-info-container .feed-column .feed-tab.image {
   padding: 0;
+  height: 100%;
 }
 
 .feed-info-container .feed-column .feed-tab img {
   width: 100%;
-  height: 544px;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -835,6 +834,7 @@ main {
 
 .feed-footer .feed-info {
   border-bottom: unset;
+  border-right: 1px solid var(--gray-1);
 }
 
 .feed-column .feed-info h6 {
@@ -847,6 +847,10 @@ main {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+}
+
+.feed-column .feed-info h6.link {
+  cursor: pointer;
 }
 
 .feed-column .feed-info h3,
@@ -873,16 +877,17 @@ main {
   width: 100%;
   height: 90.8px;
   border-bottom: 1px solid var(--gray-1);
+  flex-shrink: 0;
 }
 
 .feed-column .third-column-item.image {
   width: 100%;
-  height: unset;
+  height: 100%;
 }
 
 .feed-column .third-column-item.image img {
   width: 100%;
-  height: 544px;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -920,9 +925,7 @@ main {
   .manifesto-item {
     padding: 2.5rem 3.5rem;
   }
-  .features-main-container {
-    padding-right: 15.5rem;
-  }
+
   .feed-head,
   .manifesto-head {
     grid-template-columns: 327px 1fr;
@@ -969,7 +972,7 @@ main {
   .feed-head h2 {
     font-size: 3.5rem;
   }
-  .features-head .line {
+  .features-head .line-border {
     display: none;
   }
   .features-head h2 {
@@ -1007,6 +1010,10 @@ main {
   .feed-column .third-column-item.image img {
     height: 724px;
   }
+  .feed-footer .feed-info {
+    border: unset;
+  }
+
   .manifesto-content {
     height: 325vh;
   }
@@ -1020,15 +1027,22 @@ main {
   .hero-content .top {
     grid-template-columns: 1fr;
   }
-  .hero-content .top .image img {
+  /* .hero-content .top .image img {
     height: 280px;
+  } */
+    .marquee-section {
+    padding: 7.5rem 0;
   }
+
+  .features {
+    padding: 0;
+  }
+
   .features-main-container .accordion {
     width: 400px;
+    margin-right: 0;
   }
-  .features-main-container {
-    padding-right: 9.1rem;
-  }
+
   .features-main-container .accordion .accordion-item h3 {
     font-size: 1.65rem;
   }
@@ -1037,52 +1051,68 @@ main {
   .manifesto-head h2,
   .features-head h2 {
     padding: 2rem 0 2rem 2rem;
+    border-right: none;
   }
-  .feed-info-container, .feed-content .feed-footer {
+  .feed-info-container,
+  .feed-content .feed-footer {
     grid-template-columns: 1fr;
   }
-  .feed-info-container .feed-column .feed-info, .feed-footer .feed-info {
+  .feed-info-container .feed-column .feed-info,
+  .feed-footer .feed-info {
     flex-direction: column;
   }
   .feed-content .feed-footer .feed-tab {
     border-bottom: 1px solid var(--gray-1);
   }
 
-  .feed-info-container .feed-column .third-column-item.first, .feed-info-container .feed-column .third-column-item.second, .feed-info-container .feed-column .third-column-item.third {
+  .feed-info-container .feed-column .third-column-item.first,
+  .feed-info-container .feed-column .third-column-item.second,
+  .feed-info-container .feed-column .third-column-item.third {
     display: none;
   }
 
-  .feed-info-container .feed-column .third-column-item, .feed-info-container .feed-column:first-child .feed-tab {
+  .feed-info-container .feed-column.tab-container {
+    flex-direction: row;
+  } 
+  .feed-column.tab-container .feed-tab {
+    border-right: 1px solid var(--gray-1);
+    justify-content: center;
+    padding: 2rem;
+  }
+  .feed-column.tab-container:nth-child(3) .feed-tab {
+    border-right: none !important;
+  }
+
+  .feed-info-container .feed-column .third-column-item,
+  .feed-info-container .feed-column:first-child .feed-tab {
     height: unset;
   }
-  .feed-info-container .feed-column .feed-tab img {
-    height: 200px;
-  }
+  .feed-info-container .feed-column .feed-tab.image, .feed-info-container .feed-column .third-column-item {
+    display: none;
+  } 
 
   .feed-column .third-column-item.image img {
     height: 100px;
   }
 
   .manifesto-grid {
-    grid-template-columns: 0.15fr 1fr;
+    grid-template-columns: 1fr;
   }
   .m-right {
     grid-column: 1 / -1;
   }
   .manifesto-grid .m-left img {
-    height: 270px;
+   display: none;
   }
   .m-center {
-    padding: 3rem 2rem;
+    padding: 2.5rem;
   }
 }
 
 @media only screen and (max-width: 400px) {
   .hero-content .top h1 {
     font-size: 4rem;
-  }
-  .manifesto-grid .m-left img {
-    height: 100%;
+    padding: 5rem 5rem 5rem 2rem;
   }
   .header-content .right-side .social-icon {
     padding: 1.2rem;
@@ -1099,18 +1129,18 @@ main {
   .feed-head h2 {
     font-size: 2.5rem;
   }
-  .features-main-container {
-    padding-right: 6.15rem;
-  }
   .marquee-tag .logo img {
     max-width: 92px;
     height: 24px;
   }
-  
 }
 @media only screen and (max-width: 500px) {
 .manifesto-item{
   flex-direction: column;
+  align-items: flex-start;
+}
+.right-column {
+  padding-left: 0;
 }
 .manifesto-content, .sticky-wrapper{
   height:auto
@@ -1122,7 +1152,7 @@ main {
     height: auto;
   }
   .manifesto-item {
-    padding: 2.5rem 2rem;
+    padding: 2.5rem;
   }
 
 
@@ -1135,3 +1165,4 @@ main {
 .bottom .image img, .m-left img, .feed-tab img,.top .image img, .m-right img, .col-img img, .third-column-item.image img{
 height: 100%;
 } */
+

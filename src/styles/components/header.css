@@ -120,7 +120,6 @@
 
 @media only screen and (max-width: 400px) {
   .header-content {
-    flex-direction: column;
     gap: 0;
   }
   .header-content .logo {
@@ -128,7 +127,9 @@
   }
   .header-content .left-side {
     width: 100%;
-    border-bottom: 1px solid var(--gray-1);
+  }
+  .header-content a.second-link {
+    border: none;
   }
   .header-content .right-side {
     width: 100%;
