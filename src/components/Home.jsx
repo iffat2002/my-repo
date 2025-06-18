@@ -1,7 +1,6 @@
 import "../App.css";
 import Arrow from "../assets/svgs/Arrow";
 import React, { useEffect, useState, useRef } from "react";
-import SplitType from 'split-type';
 import gsap from "gsap";
 import Header from "./Header";
 import Marquee from "react-fast-marquee";
@@ -18,7 +17,6 @@ import CompanyLogo3 from "../assets/imgs/CompanyLogo3.png";
 import CompanyLogo4 from "../assets/imgs/CompanyLogo4.png";
 import CompanyLogo5 from "../assets/imgs/CompanyLogo5.png";
 import features from "../assets/imgs/features.png";
-import { lazy, Suspense } from "react";
 import ScrambleText from "./ScrambleText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -297,72 +295,8 @@ const Home = () => {
   //     );
   //   });
 
-  //   //hero text animation
-  //   // gsap.fromTo(
-  //   //   ".hero h1, .hero h3",
-  //   //   { y: 50, opacity: 0 },
-  //   //   {
-  //   //     y: 0,
-  //   //     opacity: 1,
-  //   //     duration: 0.6,
-  //   //     delay: 0.6,
-  //   //     ease: "power2.inOut",
-  //   //     stagger: 0.3,
-  //   //     scrollTrigger: {
-  //   //       trigger: ".hero",
-  //   //       start: "top 100%",
-  //   //       toggleActions: "play none none none",
-  //   //     },
-  //   //   }
-  //   // );
   // }, []);
 
-// useEffect(() => {
-
-//   const split = new SplitType(".hero h1 .scramble-text", {
-//     types: 'lines',
-//   });
-
-
-//   const lines = document.querySelectorAll(".hero h1 .scramble-text .line");
-
-//   lines.forEach((line) => {
-//     const wrapper = document.createElement("div");
-//     wrapper.classList.add("line-wrapper");
-//     line.parentNode.insertBefore(wrapper, line);
-//     wrapper.appendChild(line);
-//   });
-
-  
-//   gsap.fromTo(
-//     lines,
-//     {
-//       y: "110%",
-//       rotate: 4,
-//       // opacity: 0,
-//     },
-//     {
-//       y: 0,
-//       rotate: 0,
-//       opacity: 1,
-//       duration: 1,
-//       delay: 1.4,
-//       ease: "power2.in",
-//       stagger: 0.2,
-//       scrollTrigger: {
-//         trigger: ".hero",
-//         start: "top 100%",
-//         toggleActions: "play none none none",
-//       },
-//     }
-//   );
-
-//   return () => split.revert();
-// }, []);
-//   useEffect(() => {
-//  gsap.fromTo(".sertn-ai",{opacity:0}, {opacity:1, duration:1,})
-//   }, [])
-  
   return (
       <div className="sertn-ai">
       

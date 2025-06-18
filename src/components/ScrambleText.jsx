@@ -81,15 +81,15 @@ const ScrambleText = ({ text }) => {
     rotate: 0,
     opacity: 1,
     duration: 0.8,
-    // delay,
+     delay,
 
     ease: 'power2.in',
-      immediateRender: false, 
+   
     stagger: 0.2,
     scrollTrigger: {
       trigger: container,
-        once: true,
-      start: isFooter ? "top 98%" : 'top 90%',
+   
+      start: isFooter ? "top 100%" : 'top 90%',
     },
   }
 );
@@ -100,7 +100,7 @@ const ScrambleText = ({ text }) => {
    
     return () => split.revert();
 
-  }, [text]);
+  }, []);
 
 
   return (

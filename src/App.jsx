@@ -6,7 +6,7 @@ import Loader from "./components/Loader";
 
 const Home = lazy(() =>
   new Promise((resolve) =>
-    setTimeout(() => resolve(import("./components/Home")), 3600)
+    setTimeout(() => resolve(import("./components/Home")), 3000)
   )
 );
 function App() {

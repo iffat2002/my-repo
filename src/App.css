@@ -193,7 +193,6 @@ main {
   padding: 8rem 15rem 8rem 2rem;
 }
 
-
 .hero-content .top .image,
 .hero-content .bottom .image {
   width: 100%;
@@ -1159,13 +1158,6 @@ main {
 
 }
 
-
-/* .bottom .image, .m-left, .feed-tab,.top .image, .m-right, .col-img, .third-column-item.image{
-  overflow: hidden;
-}
-.bottom .image img, .m-left img, .feed-tab img,.top .image img, .m-right img, .col-img img, .third-column-item.image img{
-height: 100%;
-} */
 
 .loader-screen {
   position: relative;
