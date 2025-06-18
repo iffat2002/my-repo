@@ -149,15 +149,16 @@ function App() {
   //     ? groupedItems
   //     : groupedItems.filter((item) => item.type.toUpperCase() === activeFilter);
 
-  const [activeTab, setActiveTab] = useState("MEDIUM"); // null = show all
-
+   const [activeTab, setActiveTab] = useState("MEDIUM");
   const tabs = ["MEDIUM", "DEMOS", "COMMUNITY"];
 
-  const filteredFeed = activeTab
-    ? feedData.filter(
-        (item) => item.type && item.type.toUpperCase() === activeTab
-      )
-    : feedData;
+  // Filter logic
+  const filteredFeed = feedData.filter(
+    (item) => item.type && item.type.toUpperCase() === activeTab.toUpperCase()
+  );
+
+  console.log("Active Tab:", activeTab);
+  console.log("Filtered Feed:", filteredFeed);
 
   //manifesto animation
   const wrapperRef = useRef(null);
@@ -606,80 +607,81 @@ function App() {
           </div>
         </section>
 
-        <section className="feed">
-          <div className="box">
-            <div className="feed-content">
-              <div className="feed-head">
-                <h2>
-                  <ScrambleText text="Feed" />
-                </h2>
-              </div>
-              <div className="feed-info-container">
-                <div className="feed-column tab-container">
-                  {tabs.map((tab) => (
-                    <div
-                      key={tab}
-                      className={`feed-tab ${
-                        activeTab === tab ? "active" : ""
-                      }`}
-                      onClick={() => setActiveTab(tab)}
-                    >
-                      <h4>
-                        <ScrambleText text={tab} />
-                      </h4>
-                    </div>
-                  ))}
+         <section className="feed">
+      <div className="box">
+        <div className="feed-content">
+          <div className="feed-head">
+            <h2>
+              <ScrambleText text="Feed" />
+            </h2>
+          </div>
 
-                  <div className="feed-tab image">
-                    <img src={FeedLeft} alt="Feed Left" />
-                  </div>
-                </div>
-
-                <div className="feed-column">
-                  {filteredFeed.map((item, index) => (
-                    <div className="feed-info" key={index}>
-                      {item.date && (
-                        <h6>
-                          {" "}
-                          <ScrambleText text={item.date} />
-                        </h6>
-                      )}
-                      <h3>
-                        <ScrambleText text={item.title} />
-                      </h3>
-                      {item.type && (
-                        <h6 className="link">
-                          <ScrambleText text={item.type.toUpperCase()} />{" "}
-                          <Arrow />
-                        </h6>
-                      )}
-                    </div>
-                  ))}
-                </div>
-                <div className="feed-column">
-                  <div className="third-column-item first"></div>
-                  <div className="third-column-item second"></div>
-                  <div className="third-column-item third"></div>
-                  <div className="third-column-item image">
-                    <img src={FeedRight} alt="" />
-                  </div>
-                </div>
-              </div>
-              <div className="feed-footer">
-                <div className="feed-tab">
+          <div className="feed-info-container">
+            {/* Tabs */}
+            <div className="feed-column tab-container">
+              {tabs.map((tab) => (
+                <div
+                  key={tab}
+                  className={`feed-tab ${activeTab === tab ? "active" : ""}`}
+                  onClick={() => setActiveTab(tab)}
+                >
                   <h4>
-                    <ScrambleText text="SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI" />
+                    <ScrambleText text={tab} />
                   </h4>
                 </div>
-                <div className="feed-info">
-                  <h3>
-                    <ScrambleText text="sertn" />{" "}
-                  </h3>
+              ))}
+              <div className="feed-tab image">
+                <img src={FeedLeft} alt="Feed Left" />
+              </div>
+            </div>
+
+            {/* Feed Info (Middle Column) */}
+            <div className="feed-column">
+              {filteredFeed.map((item, index) => (
+                <div className="feed-info" key={index}>
+                  {item.date && (
+                    <h6>
+                     {item.date} 
+                    </h6>
+                  )}
+                  <h3>{item.title}</h3>
+                  {item.type && (
+                    <h6 className="link">
+                      {item.type.toUpperCase()}
+                      <Arrow />
+                    </h6>
+                  )}
                 </div>
+              ))}
+            </div>
+
+            {/* Right Column */}
+            <div className="feed-column">
+              <div className="third-column-item first"></div>
+              <div className="third-column-item second"></div>
+              <div className="third-column-item third"></div>
+              <div className="third-column-item image">
+                <img src={FeedRight} alt="Feed Right" />
               </div>
             </div>
           </div>
-        </section>
+
+          {/* Footer */}
+          <div className="feed-footer">
+            <div className="feed-tab">
+              <h4>
+                <ScrambleText text="SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI" />
+              </h4>
+            </div>
+            <div className="feed-info">
+              <h3>
+                <ScrambleText text="sertn" />
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
       </main>
     </div>
   );
