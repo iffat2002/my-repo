@@ -81,7 +81,7 @@ const ScrambleText = ({ text }) => {
     rotate: 0,
     opacity: 1,
     duration: 0.8,
-    delay,
+    // delay,
 
     ease: 'power2.in',
       immediateRender: false, 
