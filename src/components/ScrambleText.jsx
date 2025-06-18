@@ -82,7 +82,9 @@ const ScrambleText = ({ text }) => {
     opacity: 1,
     duration: 0.8,
     delay,
+
     ease: 'power2.in',
+      immediateRender: false, 
     stagger: 0.2,
     scrollTrigger: {
       trigger: container,
@@ -99,6 +101,7 @@ const ScrambleText = ({ text }) => {
     return () => split.revert();
 
   }, [text]);
+
 
   return (
     <div ref={containerRef} className="scramble-text">
