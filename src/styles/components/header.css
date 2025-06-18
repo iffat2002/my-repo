@@ -6,9 +6,9 @@
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(251, 251, 251, 0.5);
+  /* background: rgba(251, 251, 251, 0.5); */
   z-index: 99;
-  backdrop-filter: blur(4px);
+  /* backdrop-filter: blur(4px); */
 }
 
 .header-content {
@@ -134,4 +134,10 @@
   .header-content .right-side {
     width: 100%;
   }
+}
+
+.line-wrapper {
+  overflow: hidden;
+  display: block;
+
 }

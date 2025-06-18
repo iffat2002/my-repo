@@ -177,6 +177,7 @@ main {
 .hero-content .top h1 {
   font-weight: 400;
   font-size: 10rem;
+  overflow: hidden;
   line-height: 0.6;
   letter-spacing: -2%;
   vertical-align: middle;
@@ -199,6 +200,7 @@ main {
   align-items: center;
   justify-content: center;
 }
+
 
 .hero-content .top .image img,
 .hero-content .bottom .image img {
@@ -448,7 +450,7 @@ main {
   vertical-align: middle;
   color: #1e1e1e;
 }
-.features-head .line {
+.features-head .line-border {
   width: 100%;
   border-right: 1px solid var(--gray-1);
 }
@@ -863,7 +865,9 @@ main {
 .feed-footer .feed-info h3 {
   text-align: right;
 }
-
+.feed-tab{
+  height: auto;
+}
 .feed-tab.active {
   background-color: var(--black);
   color: var(--white);
@@ -968,7 +972,7 @@ main {
   .feed-head h2 {
     font-size: 3.5rem;
   }
-  .features-head .line {
+  .features-head .line-border {
     display: none;
   }
   .features-head h2 {
@@ -1017,6 +1021,7 @@ main {
     height: 210vh;
   }
 }
+
 
 @media only screen and (max-width: 600px) {
   .hero-content .top {
@@ -1150,11 +1155,14 @@ main {
     padding: 2.5rem;
   }
 
-  /* .pin-spacer{
-      height: 1700px !important;
-      padding: 0 !important;
-} */
+
 }
-/* .pin-spacer{
-      padding: 0 !important;
+
+
+/* .bottom .image, .m-left, .feed-tab,.top .image, .m-right, .col-img, .third-column-item.image{
+  overflow: hidden;
+}
+.bottom .image img, .m-left img, .feed-tab img,.top .image img, .m-right img, .col-img img, .third-column-item.image img{
+height: 100%;
 } */
+

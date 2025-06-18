@@ -1,6 +1,7 @@
 import "./App.css";
 import Arrow from "./assets/svgs/Arrow";
 import React, { useEffect, useState, useRef } from "react";
+import SplitType from 'split-type';
 import gsap from "gsap";
 import Header from "./components/Header";
 import Marquee from "react-fast-marquee";
@@ -254,72 +255,113 @@ function App() {
   }, [openIndex]);
 
   //images animation
-  useEffect(() => {
-    const isMobile = window.innerWidth <= 500;
-    //move to right
-    const cardsLeft = gsap.utils.toArray(
-      ".bottom .image, .m-left, .feed-main-content-item .image"
-    );
-    cardsLeft.forEach((card, index) => {
-      gsap.fromTo(
-        card,
-        { scaleX: 0 },
-        {
-          scaleX: 1,
-          duration: 1,
-          delay: isMobile ? 0.8 : 1.3,
-          ease: "power2.inOut",
-          transformOrigin: "left",
-          scrollTrigger: {
-            trigger: card,
-            start: isMobile ? "top 90%" : "top 90%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    });
+  // useEffect(() => {
+  //   const isMobile = window.innerWidth <= 500;
+  //   //move to right
+  //   const cardsLeft = gsap.utils.toArray(".bottom .image, .m-left, .col-img");
+  //   cardsLeft.forEach((card, index) => {
+  //     gsap.fromTo(
+  //       card,
+  //       { width: 0 },
+  //       {
+  //         width: "100%",
+  //         duration: 1,
+  //         delay: isMobile ? 0.8 : 0.7,
+  //         ease: "power2.inOut",
+  //         transformOrigin: "left",
+  //         scrollTrigger: {
+  //           trigger: card,
+  //           start: isMobile ? "top 90%" : "top 95%",
+  //           toggleActions: "play none none none",
+  //         },
+  //       }
+  //     );
+  //   });
 
-    //move to left
-    const cardsRight = gsap.utils.toArray(".top .image, .m-right, .feed-right");
-    cardsRight.forEach((card, index) => {
-      gsap.fromTo(
-        card,
-        { scaleX: 0 },
-        {
-          scaleX: 1,
-          duration: 1,
-          delay: isMobile ? 1 : 1.3,
-          ease: "power2.inOut",
-          transformOrigin: "right",
-          scrollTrigger: {
-            trigger: card,
-            start: isMobile ? "top 90%" : "top 90%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    });
+  //    //move to left
+  //   const cardsRight = gsap.utils.toArray(".top .image, .m-right, .third-column-item.image");
+  //   cardsRight.forEach((card, index) => {
+  //     gsap.fromTo(
+  //       card,
+  //       { width: 0 },
+  //       {
+  //         width: "100%",
+  //         duration: 1,
+  //         delay: isMobile ? 1 : 0.5,
+  //         ease: "power2.inOut",
+  //         transformOrigin: "right",
+  //         scrollTrigger: {
+  //           trigger: card,
+  //           start: isMobile ? "top 90%" :"top 90%" ,
+  //           toggleActions: "play none none none",
+  //         },
+  //       }
+  //     );
+  //   });
 
-    //hero text animation
-    gsap.fromTo(
-      ".hero h1, .hero h3",
-      { y: 50, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.6,
-        delay: 0.6,
-        ease: "power2.inOut",
-        stagger: 0.3,
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "top 100%",
-          toggleActions: "play none none none",
-        },
-      }
-    );
-  }, []);
+  //   //hero text animation
+  //   // gsap.fromTo(
+  //   //   ".hero h1, .hero h3",
+  //   //   { y: 50, opacity: 0 },
+  //   //   {
+  //   //     y: 0,
+  //   //     opacity: 1,
+  //   //     duration: 0.6,
+  //   //     delay: 0.6,
+  //   //     ease: "power2.inOut",
+  //   //     stagger: 0.3,
+  //   //     scrollTrigger: {
+  //   //       trigger: ".hero",
+  //   //       start: "top 100%",
+  //   //       toggleActions: "play none none none",
+  //   //     },
+  //   //   }
+  //   // );
+  // }, []);
 
+useEffect(() => {
+
+  const split = new SplitType(".hero h1 .scramble-text", {
+    types: 'lines',
+  });
+
+
+  const lines = document.querySelectorAll(".hero h1 .scramble-text .line");
+
+  lines.forEach((line) => {
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("line-wrapper");
+    line.parentNode.insertBefore(wrapper, line);
+    wrapper.appendChild(line);
+  });
+
+  
+  gsap.fromTo(
+    lines,
+    {
+      y: "110%",
+      rotate: 4,
+      // opacity: 0,
+    },
+    {
+      y: 0,
+      rotate: 0,
+      opacity: 1,
+      duration: 1,
+      delay: 0.4,
+      ease: "power2.in",
+      stagger: 0.2,
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top 100%",
+        toggleActions: "play none none none",
+      },
+    }
+  );
+
+  return () => split.revert();
+}, []);
+  
   return (
     <div className="sertn-ai">
       <main>
@@ -472,8 +514,8 @@ function App() {
                 <h2>
                   <ScrambleText text="Features" />
                 </h2>
-                <div className="line"></div>
-                <div className="line"></div>
+                <div className="line-border"></div>
+                <div className="line-border"></div>
               </div>
 
               <div className="features-main-container">
@@ -626,7 +668,7 @@ function App() {
                   onClick={() => setActiveTab(tab)}
                 >
                   <h4>
-                    <ScrambleText text={tab} />
+                   {tab} 
                   </h4>
                 </div>
               ))}
