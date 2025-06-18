@@ -42,9 +42,9 @@ const Loader = () => {
     draw();
 
     const timer = setTimeout(() => {
-      setFadeOut(true);               // trigger CSS fade-out
-      cancelAnimationFrame(animation); // stop animation
-    }, 3100); // slightly before 3s to allow fade effect
+      setFadeOut(true);           
+      cancelAnimationFrame(animation);
+    }, 3200); 
 
     return () => {
       clearTimeout(timer);
@@ -55,7 +55,7 @@ const Loader = () => {
   return (
     <div className={`loader-screen ${fadeOut ? 'fade-out' : ''}`}>
       <canvas ref={canvasRef} className="matrix-canvas" />
-      <h1 className="crt-text" data-text="SERTN AI">SERTN AI</h1>
+      {/* <h1 className="crt-text" data-text="SERTN AI">SERTN AI</h1> */}
     </div>
   );
 };

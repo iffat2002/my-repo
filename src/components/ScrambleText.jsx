@@ -28,6 +28,7 @@ const ScrambleText = ({ text }) => {
 
       const startScramble = () => {
         if (isScrambling) return;
+        if (container.closest('.feed-info-container')) {return};
         isScrambling = true;
         span.classList.add('scrambling');
 
@@ -82,23 +83,21 @@ const ScrambleText = ({ text }) => {
     opacity: 1,
     duration: 0.8,
     delay,
+    
     ease: 'power2.in',
-    stagger: 0.2,
+    stagger: 0.1,
     scrollTrigger: {
       trigger: container,
-        once: true,
+    
       start: isFooter ? "top 98%" : 'top 90%',
     },
   }
 );
 
 });
-
-
-   
     return () => split.revert();
 
-  }, [text]);
+  }, []);
 
   return (
     <div ref={containerRef} className="scramble-text">

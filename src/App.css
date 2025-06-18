@@ -247,7 +247,7 @@ main {
 }
 .marquee-section {
   width: 100%;
-  padding: 8rem 0;
+  padding: 13.5rem 0;
 }
 .marquee-tag {
   width: 100%;
@@ -313,7 +313,8 @@ main {
   width: 100%;
   border: 1px solid var(--gray-1);
   border-bottom: none;
-  height: 300vh;
+  /* height: 300vh; */
+  height: 286vh;
 }
 .manifesto-head {
   width: 100%;
@@ -427,7 +428,6 @@ main {
 }
 .features {
   width: 100%;
-  padding: 7rem 0;
 }
 .features-content {
   width: 100%;
@@ -1158,13 +1158,6 @@ main {
 
 }
 
-
-/* .bottom .image, .m-left, .feed-tab,.top .image, .m-right, .col-img, .third-column-item.image{
-  overflow: hidden;
-}
-.bottom .image img, .m-left img, .feed-tab img,.top .image img, .m-right img, .col-img img, .third-column-item.image img{
-height: 100%;
-} */
 
 .loader-screen {
   position: relative;

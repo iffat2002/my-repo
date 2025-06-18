@@ -1,7 +1,6 @@
-import "../App.css";
+
 import Arrow from "../assets/svgs/Arrow";
 import React, { useEffect, useState, useRef } from "react";
-import SplitType from 'split-type';
 import gsap from "gsap";
 import Header from "./Header";
 import Marquee from "react-fast-marquee";
@@ -18,13 +17,14 @@ import CompanyLogo3 from "../assets/imgs/CompanyLogo3.png";
 import CompanyLogo4 from "../assets/imgs/CompanyLogo4.png";
 import CompanyLogo5 from "../assets/imgs/CompanyLogo5.png";
 import features from "../assets/imgs/features.png";
-import { lazy, Suspense } from "react";
+
 import ScrambleText from "./ScrambleText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
-const Home = () => {
-    const marqueeContent = [
+
+function Home() {
+  const marqueeContent = [
     { text: "SERTN AVS DEPLOYED TO EIGENLAYER TESTINET", link: "#" },
     { text: "TAKE ME THERE", icon: <Arrow />, link: "#" },
     { text: "OMRON - BITTENSOR SUBNET 2 IS LIVE ON MAINNET", link: "#" },
@@ -149,15 +149,16 @@ const Home = () => {
   //     ? groupedItems
   //     : groupedItems.filter((item) => item.type.toUpperCase() === activeFilter);
 
-  const [activeTab, setActiveTab] = useState("MEDIUM"); // null = show all
-
+   const [activeTab, setActiveTab] = useState("MEDIUM");
   const tabs = ["MEDIUM", "DEMOS", "COMMUNITY"];
 
-  const filteredFeed = activeTab
-    ? feedData.filter(
-        (item) => item.type && item.type.toUpperCase() === activeTab
-      )
-    : feedData;
+  // Filter logic
+  const filteredFeed = feedData.filter(
+    (item) => item.type && item.type.toUpperCase() === activeTab.toUpperCase()
+  );
+
+  console.log("Active Tab:", activeTab);
+  console.log("Filtered Feed:", filteredFeed);
 
   //manifesto animation
   const wrapperRef = useRef(null);
@@ -297,75 +298,13 @@ const Home = () => {
   //     );
   //   });
 
-  //   //hero text animation
-  //   // gsap.fromTo(
-  //   //   ".hero h1, .hero h3",
-  //   //   { y: 50, opacity: 0 },
-  //   //   {
-  //   //     y: 0,
-  //   //     opacity: 1,
-  //   //     duration: 0.6,
-  //   //     delay: 0.6,
-  //   //     ease: "power2.inOut",
-  //   //     stagger: 0.3,
-  //   //     scrollTrigger: {
-  //   //       trigger: ".hero",
-  //   //       start: "top 100%",
-  //   //       toggleActions: "play none none none",
-  //   //     },
-  //   //   }
-  //   // );
+
   // }, []);
 
-// useEffect(() => {
 
-//   const split = new SplitType(".hero h1 .scramble-text", {
-//     types: 'lines',
-//   });
-
-
-//   const lines = document.querySelectorAll(".hero h1 .scramble-text .line");
-
-//   lines.forEach((line) => {
-//     const wrapper = document.createElement("div");
-//     wrapper.classList.add("line-wrapper");
-//     line.parentNode.insertBefore(wrapper, line);
-//     wrapper.appendChild(line);
-//   });
-
-  
-//   gsap.fromTo(
-//     lines,
-//     {
-//       y: "110%",
-//       rotate: 4,
-//       // opacity: 0,
-//     },
-//     {
-//       y: 0,
-//       rotate: 0,
-//       opacity: 1,
-//       duration: 1,
-//       delay: 1.4,
-//       ease: "power2.in",
-//       stagger: 0.2,
-//       scrollTrigger: {
-//         trigger: ".hero",
-//         start: "top 100%",
-//         toggleActions: "play none none none",
-//       },
-//     }
-//   );
-
-//   return () => split.revert();
-// }, []);
-//   useEffect(() => {
-//  gsap.fromTo(".sertn-ai",{opacity:0}, {opacity:1, duration:1,})
-//   }, [])
   
   return (
-      <div className="sertn-ai">
-      
+    <div className="sertn-ai">
       <main>
         <Header />
         <section className="hero">
@@ -651,84 +590,84 @@ const Home = () => {
           </div>
         </section>
 
-        <section className="feed">
-          <div className="box">
-            <div className="feed-content">
-              <div className="feed-head">
-                <h2>
-                  <ScrambleText text="Feed" />
-                </h2>
-              </div>
-              <div className="feed-info-container">
-                <div className="feed-column tab-container">
-                  {tabs.map((tab) => (
-                    <div
-                      key={tab}
-                      className={`feed-tab ${
-                        activeTab === tab ? "active" : ""
-                      }`}
-                      onClick={() => setActiveTab(tab)}
-                    >
-                      <h4>
-                        <ScrambleText text={tab} />
-                      </h4>
-                    </div>
-                  ))}
+         <section className="feed">
+      <div className="box">
+        <div className="feed-content">
+          <div className="feed-head">
+            <h2>
+              <ScrambleText text="Feed" />
+            </h2>
+          </div>
 
-                  <div className="feed-tab image col-img">
-                    <img src={FeedLeft} alt="Feed Left" />
-                  </div>
-                </div>
-
-                <div className="feed-column">
-                  {filteredFeed.map((item, index) => (
-                    <div className="feed-info" key={index}>
-                      {item.date && (
-                        <h6>
-                          {" "}
-                          <ScrambleText text={item.date} />
-                        </h6>
-                      )}
-                      <h3>
-                        <ScrambleText text={item.title} />
-                      </h3>
-                      {item.type && (
-                        <h6 className="link">
-                          <ScrambleText text={item.type.toUpperCase()} />{" "}
-                          <Arrow />
-                        </h6>
-                      )}
-                    </div>
-                  ))}
-                </div>
-                <div className="feed-column">
-                  <div className="third-column-item first"></div>
-                  <div className="third-column-item second"></div>
-                  <div className="third-column-item third"></div>
-                  <div className="third-column-item image">
-                    <img src={FeedRight} alt="" />
-                  </div>
-                </div>
-              </div>
-              <div className="feed-footer">
-                <div className="feed-tab">
+          <div className="feed-info-container">
+            {/* Tabs */}
+            <div className="feed-column tab-container">
+              {tabs.map((tab) => (
+                <div
+                  key={tab}
+                  className={`feed-tab ${activeTab === tab ? "active" : ""}`}
+                  onClick={() => setActiveTab(tab)}
+                >
                   <h4>
-                    <ScrambleText text="SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI" />
+                  <ScrambleText text={tab} /> 
                   </h4>
                 </div>
-                <div className="feed-info">
-                  <h3>
-                    <ScrambleText text="sertn" />{" "}
-                  </h3>
+              ))}
+              <div className="feed-tab image">
+                <img src={FeedLeft} alt="Feed Left" />
+              </div>
+            </div>
+
+            {/* Feed Info (Middle Column) */}
+            <div className="feed-column">
+              {filteredFeed.map((item, index) => (
+                <div className="feed-info" key={index}>
+                  {item.date && (
+                    <h6>
+                    <ScrambleText text={item.date} /> 
+                    </h6>
+                  )}
+                  <h3><ScrambleText text={item.title} /></h3>
+                  {item.type && (
+                    <h6 className="link">
+                  <ScrambleText    text={item.type.toUpperCase()} />
+                      <Arrow />
+                    </h6>
+                  )}
                 </div>
+              ))}
+            </div>
+
+            {/* Right Column */}
+            <div className="feed-column">
+              <div className="third-column-item first"></div>
+              <div className="third-column-item second"></div>
+              <div className="third-column-item third"></div>
+              <div className="third-column-item image">
+                <img src={FeedRight} alt="Feed Right" />
               </div>
             </div>
           </div>
-        </section>
+
+          {/* Footer */}
+          <div className="feed-footer">
+            <div className="feed-tab">
+              <h4>
+                <ScrambleText text="SERTN - WE PROVIDE CERTAINTY FOR ON-CHAIN AI" />
+              </h4>
+            </div>
+            <div className="feed-info">
+              <h3>
+                <ScrambleText text="sertn" />
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
       </main>
-     
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
