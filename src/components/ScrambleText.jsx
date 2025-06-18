@@ -60,20 +60,19 @@ const ScrambleText = ({ text }) => {
     // text animation
     const lines = container.querySelectorAll('.line');
     lines.forEach(line => {
-      if(line?.closest(".feed-footer")) return;
+    
    
   const wrapper = document.createElement('div');
   wrapper.classList.add('line-wrapper');
   line.parentNode.insertBefore(wrapper, line);
   wrapper.appendChild(line);
-     let start =false;
-        if(line?.closest(".hero-content .top")) {
-          start = true
-        }
+    const isHero = line.closest('.hero-content .top');
+  const delay = isHero ? 1 : 0;
+    const isFooter = line.closest('.feed-footer');
   gsap.fromTo(
   lines,
   {
-    y: '80px',
+    y:  isHero ? "100%" : '80px',
     rotate: 4,
     opacity: 0,
   },
@@ -82,11 +81,13 @@ const ScrambleText = ({ text }) => {
     rotate: 0,
     opacity: 1,
     duration: 0.8,
+    delay,
     ease: 'power2.in',
-    stagger: 0.1,
+    stagger: 0.2,
     scrollTrigger: {
       trigger: container,
-      start: start ? "top 98%" : 'top 90%',
+        once: true,
+      start: isFooter ? "top 98%" : 'top 90%',
     },
   }
 );

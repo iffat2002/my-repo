@@ -1166,3 +1166,44 @@ main {
 height: 100%;
 } */
 
+.loader-screen {
+  position: relative;
+  height: 100vh;
+  background: black;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.matrix-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.crt-text {
+  color: white;
+  font-size: 5rem;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 0 2px #aaa, 0 0 10px rgba(255, 255, 255, 0.2);
+  animation: flicker-loader 1.8s infinite alternate;
+}
+
+@keyframes flicker-loader {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.fade-out {
+  animation: fadeOut 0.4s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0.1;
+    visibility: hidden;
+  }
+}
