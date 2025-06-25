@@ -17,7 +17,7 @@ import CompanyLogo3 from "../assets/imgs/CompanyLogo3.png";
 import CompanyLogo4 from "../assets/imgs/CompanyLogo4.png";
 import CompanyLogo5 from "../assets/imgs/CompanyLogo5.png";
 import features from "../assets/imgs/features.png";
-
+import sertn from "../assets/imgs/sertn.png";
 import ScrambleText from "./ScrambleText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -163,18 +163,28 @@ function Home() {
   //manifesto animation
   const wrapperRef = useRef(null);
   const tableRef = useRef(null);
+  const manifestoRef = useRef(null);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  useEffect(() => {
     if (window.innerWidth >= 750) {
+      const end = window.innerWidth === 1440 && "bottom bottom" ;
+      const y = window.innerWidth >= 1440 ? "-440px" : "-540px";
       const ctx = gsap.context(() => {
         gsap.to(".manifesto-item", {
-          y: "-440px",
+          y,
           delay: 0.4,
           ease: "none",
           scrollTrigger: {
             trigger: wrapperRef.current,
             start: "top top",
-            //  end: () => `+=700px`,
+            // end: () => `+=200px`,
+          end: end,
             pin: true,
             //   anticipatePin: 1,
             pinSpacing: false,
@@ -185,7 +195,13 @@ function Home() {
 
       return () => ctx.revert();
     }
-  }, []);
+  }, [windowWidth]);
+
+//   useEffect(() => {
+//   if (window.innerWidth >= 750 && manifestoRef.current) {
+//     manifestoRef.current.style.height = "calc(50vh + 440px + 440px + 440px + 440px  )";
+//   }
+// }, []);
 
   //accordion animation
   const cardRefs = useRef([]);
@@ -368,7 +384,7 @@ function Home() {
 
         <section className="manifesto">
           <div className="box">
-            <div className="manifesto-content">
+            <div className="manifesto-content" ref={manifestoRef}>
               <div className="manifesto-head">
                 <h2>
                   <ScrambleText text="Manifesto" />
@@ -619,7 +635,7 @@ function Home() {
             </div>
 
             {/* Feed Info (Middle Column) */}
-            <div className="feed-column">
+            <div className="feed-column middle">
               {filteredFeed.map((item, index) => (
                 <div className="feed-info" key={index}>
                   {item.date && (
@@ -665,6 +681,10 @@ function Home() {
         </div>
       </div>
     </section>
+
+<div className="bottom-img">
+    <img src={sertn} alt="sertn" />
+</div>
       </main>
     </div>
   );

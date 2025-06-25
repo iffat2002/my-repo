@@ -313,8 +313,8 @@ main {
   width: 100%;
   border: 1px solid var(--gray-1);
   border-bottom: none;
-  /* height: 300vh; */
-  height: 286vh;
+  height: 302vh;
+  /* height: 286vh; */
 }
 .manifesto-head {
   width: 100%;
@@ -614,7 +614,48 @@ main {
 .feed-main-content-item.bottom .info h3 {
   text-align: right;
 }
-.feed-main-content-item.first .info:hover {
+.feed-info{
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.middle .feed-info:nth-child(1):hover {
+  background-color: var(--purple);
+}
+
+.middle .feed-info:nth-child(2):hover {
+    background-color: #8cacef;
+}
+
+.middle .feed-info:nth-child(3):hover {
+  background-color: #91cedf;
+}
+
+.middle .feed-info:nth-child(4):hover {
+   background-color: #8fc8a8;
+}
+
+.middle .feed-info:nth-child(5):hover {
+ background-color: #ca7d9e;
+}
+
+
+
+.middle .feed-info:nth-child(6):hover {
+  background-color: var(--purple);
+}
+
+.middle .feed-info:nth-child(7):hover {
+  background-color: #8cacef;
+}
+
+.middle .feed-info:nth-child(8):hover {
+  background-color: #91cedf;
+}
+.middle .feed-info:nth-child(9):hover {
+  background-color: #8fc8a8;
+}
+/* .feed-main-content-item.first .info:hover {
   background-color: var(--purple);
 }
 .feed-main-content-item.second .info:hover {
@@ -641,7 +682,7 @@ main {
 }
 .wrapper-content:nth-child(6):hover {
   background-color: #8fc8a8;
-}
+} */
 .feed-main-content-item .tab {
   width: 100%;
   display: flex;
@@ -805,9 +846,9 @@ main {
 }
 
 .feed-column .feed-tab:hover,
-.feed-column .feed-info:hover,
 .feed-footer .feed-tab:hover {
-  background-color: var(--purple);
+  background-color: var(--purple); 
+  cursor: pointer;
 }
 
 .feed-info-container .feed-column .feed-tab.image {
@@ -835,6 +876,7 @@ main {
 .feed-footer .feed-info {
   border-bottom: unset;
   border-right: 1px solid var(--gray-1);
+  cursor: pointer;
 }
 
 .feed-column .feed-info h6 {
@@ -890,7 +932,26 @@ main {
   height: 100%;
   object-fit: cover;
 }
+.bottom-img{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10rem 0rem;
+}
+.bottom-img img{
+  height: 100vh;
+  width: 100%;
+  object-fit: contain;
+}
+@media only screen and (max-width: 1440px) {
+.manifesto-content{
+  height: 1535px;
+}
+.manifesto-table{
+  height: auto;
+}
 
+}
 @media only screen and (max-width: 1240px) {
   .hero-content .top h1 {
     font-size: 7rem;
@@ -950,6 +1011,9 @@ main {
   }
   .feed-info-container .feed-column .feed-tab img {
     height: 490px;
+  }
+  .manifesto-content{
+    height: 317vh;;
   }
 }
 
@@ -1015,7 +1079,7 @@ main {
   }
 
   .manifesto-content {
-    height: 325vh;
+    height: 357vh;
   }
   .sticky-wrapper {
     height: 210vh;
@@ -1144,6 +1208,9 @@ main {
 }
 .manifesto-content, .sticky-wrapper{
   height:auto
+}
+.bottom-img{
+  padding: 0;
 }
 }
 
